@@ -54,7 +54,7 @@ export default function TopBar({ onScan }) {
       </div>
       <div className="flex items-center gap-4">
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-sm">search</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[18px] pointer-events-none">search</span>
           <input
             className="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-secondary/20 w-56"
             placeholder="Scan domain (e.g. example.com)..."
@@ -64,7 +64,7 @@ export default function TopBar({ onScan }) {
             onKeyDown={handleKeyDown}
             aria-invalid={Boolean(inputError)}
           />
-          <div className="text-xs mt-1 text-red-500 min-h-[1rem]">{helperText}</div>
+          <div className="absolute left-0 top-full mt-1 pl-3 text-xs text-red-500 w-full overflow-hidden text-ellipsis whitespace-nowrap">{helperText}</div>
         </div>
         <button
           className="px-3 py-1.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-secondary/80 transition-colors"

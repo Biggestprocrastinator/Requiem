@@ -11,14 +11,14 @@ export default function Layout({ onScan }) {
     <div className="mt-16 p-6 space-y-6 max-w-[1600px]">
       <Outlet />
     </div>
-    <footer className="mt-auto p-4 border-t border-outline-variant/10 text-on-surface-variant/40 text-[10px] font-bold uppercase tracking-widest flex justify-between items-center">
+    {/* <footer className="mt-auto p-4 border-t border-outline-variant/10 text-on-surface-variant/40 text-[10px] font-bold uppercase tracking-widest flex justify-between items-center">
           <span>© 2024 Luminous Guardian Security Services</span>
           <div className="flex gap-4">
             <a className="hover:text-secondary transition-colors" href="#">Privacy</a>
             <a className="hover:text-secondary transition-colors" href="#">Compliance</a>
             <a className="hover:text-secondary transition-colors" href="#">Support</a>
           </div>
-        </footer>
+        </footer> */}
       </main>
     </>
   );
