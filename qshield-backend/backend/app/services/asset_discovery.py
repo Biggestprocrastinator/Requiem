@@ -98,7 +98,14 @@ def _filter_live_domains(domains: List[str]) -> Tuple[List[str], bool]:
     if not domains:
         return [], True
 
-    cmd = _locate_executable("httpx") + ["-silent"]
+    cmd = _locate_executable("httpx") + [
+        "-silent",
+        "-follow-redirects",
+        "-timeout",
+        "5",
+        "-retries",
+        "2",
+    ]
     try:
         payload = "\n".join(domains)
         result = subprocess.run(
@@ -151,11 +158,13 @@ def discover_assets(domain: str):
         cleaned_candidate = clean_domain(candidate)
         ip_address = _resolve_ip(cleaned_candidate)
         print(f"{cleaned_candidate} → {ip_address}")
+        live_httpx = cleaned_candidate in live_domains
         assets.append(
             {
                 "domain": cleaned_candidate,
                 "ip": ip_address,
-                "is_live": cleaned_candidate in live_domains,
+                "is_live": live_httpx,
+                "live_httpx": live_httpx,
             }
         )
     print("Live domains:", len(live_domains))

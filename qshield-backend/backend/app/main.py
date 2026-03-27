@@ -91,7 +91,12 @@ def map_header_ui(entry: dict) -> dict:
 def classify_asset_type(domain: str | None, ports: dict | None) -> str:
     normalized = (domain or "").lower()
     port_map = ports or {}
-    has_web_port = bool(port_map.get("80") or port_map.get("443"))
+    has_web_port = bool(
+        port_map.get("80")
+        or port_map.get("443")
+        or port_map.get("8080")
+        or port_map.get("8443")
+    )
     if has_web_port:
         return "web"
     if "api" in normalized:
@@ -123,7 +128,24 @@ def run_crypto_scans(assets: list[dict]) -> list[dict]:
             asset["ip"] = discovered_ip
         asset["services"] = services
         print("After Nmap:", asset)
+        if not services:
+            web_ports = [p for p in ("80", "443", "8080", "8443") if ports.get(p)]
+            if web_ports:
+                services = [
+                    {
+                        "port": int(port),
+                        "service": "http",
+                        "product": "",
+                        "version": "",
+                        "outdated": False,
+                    }
+                    for port in web_ports
+                ]
+                asset["services"] = services
         outdated = any(service.get("outdated") for service in services)
+        is_live = bool(asset.get("live_httpx")) or len(services) > 0
+        asset["is_live"] = is_live
+        print(domain, "live:", is_live)
 
         if not has_tls:
             return {

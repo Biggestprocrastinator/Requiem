@@ -13,17 +13,21 @@ def _locate_nmap() -> list[str]:
 
 
 def _parse_ports(output: str) -> dict:
-    ports = {"80": False, "443": False}
+    ports = {"80": False, "443": False, "8080": False, "8443": False}
     for line in output.splitlines():
         if "80/tcp" in line and "open" in line:
             ports["80"] = True
         if "443/tcp" in line and "open" in line:
             ports["443"] = True
+        if "8080/tcp" in line and "open" in line:
+            ports["8080"] = True
+        if "8443/tcp" in line and "open" in line:
+            ports["8443"] = True
     return ports
 
 
 def scan_ports(domain: str):
-    command = _locate_nmap() + ["-p", "80,443", "--open", domain]
+    command = _locate_nmap() + ["-p", "80,443,8080,8443", "--open", domain]
     try:
         result = subprocess.run(
             command,
@@ -36,7 +40,7 @@ def scan_ports(domain: str):
         if result.returncode != 0:
             return {
                 "domain": domain,
-                "ports": {"80": False, "443": True},
+                "ports": {"80": False, "443": False, "8080": False, "8443": False},
             }
 
         ports = _parse_ports(result.stdout + result.stderr)
@@ -48,7 +52,7 @@ def scan_ports(domain: str):
     except (subprocess.TimeoutExpired, OSError):
         return {
             "domain": domain,
-            "ports": {"80": False, "443": True},
+            "ports": {"80": False, "443": False, "8080": False, "8443": False},
         }
 
 
