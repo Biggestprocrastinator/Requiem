@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 const navItems = [
   { path: '/', icon: 'dashboard', label: 'Dashboard' },
   { path: '/assets', icon: 'inventory_2', label: 'Assets' },
+  { path: '/asset-inventory', icon: 'account_tree', label: 'Asset Inventory' },
   // { path: '/monitoring', icon: 'monitor_heart', label: 'Monitoring' },
   { path: '/security', icon: 'security', label: 'Security' },
   { path: '/analytics', icon: 'analytics', label: 'Analytics' },
@@ -59,9 +60,6 @@ export default function Sidebar() {
           <span className="material-symbols-outlined">settings</span>
           <span>Settings</span>
         </NavLink>
-        <button className="w-full mt-4 bg-gradient-to-r from-secondary to-secondary-container text-white py-3 px-4 rounded-xl font-bold uppercase text-xs tracking-widest shadow-xl shadow-secondary/20 active:scale-95 transition-all">
-          Emergency Lockdown
-        </button>
         <button
           onClick={handleLogout}
           className="w-full mt-2 bg-zinc-900 border border-zinc-700 hover:bg-zinc-800 text-white py-3 px-4 rounded-xl font-bold uppercase text-xs tracking-widest shadow-xl transition-all flex items-center justify-center gap-2"

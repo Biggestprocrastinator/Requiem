@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Assets from './pages/Assets';
+import AssetInventory from './pages/AssetInventory';
 import Monitoring from './pages/Monitoring';
 import Security from './pages/Security';
 import Analytics from './pages/Analytics';
@@ -67,6 +68,7 @@ export default function App() {
             <Route path="/" element={<Layout onScan={handleScan} />}>
               <Route index element={<Dashboard scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="assets" element={<Assets scanData={scanData} isLoading={isLoading} error={error} />} />
+              <Route path="asset-inventory" element={<AssetInventory scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="monitoring" element={<Monitoring scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="security" element={<Security scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="analytics" element={<Analytics scanData={scanData} isLoading={isLoading} error={error} />} />

@@ -64,6 +64,7 @@ const buildPieData = (data) => {
     labels: ["Web", "API", "Server"],
     datasets: [
       {
+        label: "Asset Count",
         data: [web, api, server],
         backgroundColor: ["#3b82f6", "#10b981", "#f59e0b"],
         borderWidth: 0
@@ -85,6 +86,7 @@ const buildBarData = (data) => {
     labels: ["Low", "Medium", "High"],
     datasets: [
       {
+        label: "Asset Count",
         data: [riskCount.low, riskCount.medium, riskCount.high],
         backgroundColor: ["#22c55e", "#eab308", "#ef4444"],
         borderWidth: 0
