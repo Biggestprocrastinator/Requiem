@@ -18070,5 +18070,1141 @@
         }
       ]
     }
+  },
+  {
+    "timestamp": "2026-03-27T16:38:29.106421",
+    "domain": "github.com",
+    "payload": {
+      "summary": {
+        "total_assets": 20,
+        "https_enabled": 3,
+        "http_only": 0,
+        "quantum_vulnerable": 2,
+        "quantum_safe": 17,
+        "high_risk_assets": 1,
+        "header_issues": 19,
+        "unreachable_assets": 1,
+        "expiring_soon": 0,
+        "outdated_services": 0
+      },
+      "counts": {
+        "domains": 20,
+        "ssl": 3,
+        "ips": 4
+      },
+      "inventory": {
+        "domains": [
+          "github.com",
+          "minesweeper.github.com",
+          "shipunyc.github.com",
+          "shishir3611.github.com",
+          "twingo-b.github.com",
+          "waratuman.github.com",
+          "baladao.github.com",
+          "4dispel.github.com",
+          "bdstefan.github.com",
+          "cjdb.github.com",
+          "ianli.github.com",
+          "lb-140-82-113-35-iad.github.com",
+          "mroonga.github.com",
+          "obiecre.github.com",
+          "data-science.github.com",
+          "soveran.github.com",
+          "bigeasy.github.com",
+          "jeffreykegler.github.com",
+          "smugen-mugen.github.com",
+          "smtp.github.com"
+        ],
+        "ssl_enabled": [
+          "data-science.github.com",
+          "github.com",
+          "lb-140-82-113-35-iad.github.com"
+        ],
+        "http_only": [],
+        "ip_addresses": [
+          "140.82.113.32",
+          "140.82.113.35",
+          "185.199.110.153",
+          "20.207.73.82"
+        ],
+        "ports": [
+          80,
+          443
+        ]
+      },
+      "risk": "High",
+      "score": 22,
+      "rating": "Critical",
+      "quantum_status": "Vulnerable",
+      "classical_security": "Moderate",
+      "quantum_security": "Vulnerable",
+      "insights": [
+        "All assets meet TLS 1.2+ requirements",
+        "Some assets remain quantum vulnerable",
+        "CSP missing on 19/20 assets",
+        "HSTS not enabled on 19/20 assets",
+        "Clickjacking protection missing on 19/20 assets",
+        "17 assets do not support TLS",
+        "1 assets unreachable or TLS handshake failed"
+      ],
+      "assets": [
+        {
+          "domain": "github.com",
+          "ip": "20.207.73.82",
+          "is_live": true,
+          "live_httpx": false,
+          "services": [
+            {
+              "port": 22,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 80,
+              "service": "http",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "https",
+              "product": "",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "type": "web"
+        },
+        {
+          "domain": "minesweeper.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "shipunyc.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "shishir3611.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "twingo-b.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "waratuman.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "baladao.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "4dispel.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "bdstefan.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "cjdb.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "ianli.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "lb-140-82-113-35-iad.github.com",
+          "ip": "140.82.113.35",
+          "is_live": true,
+          "live_httpx": false,
+          "services": [
+            {
+              "port": 22,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 80,
+              "service": "http",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "type": "web"
+        },
+        {
+          "domain": "mroonga.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "obiecre.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "data-science.github.com",
+          "ip": "185.199.110.153",
+          "is_live": true,
+          "live_httpx": false,
+          "services": [
+            {
+              "port": 80,
+              "service": "http",
+              "product": "GitHub.com",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "https",
+              "product": "GitHub.com",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "type": "web"
+        },
+        {
+          "domain": "soveran.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "bigeasy.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "jeffreykegler.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "smugen-mugen.github.com",
+          "ip": null,
+          "is_live": false,
+          "live_httpx": false,
+          "services": [],
+          "type": "server"
+        },
+        {
+          "domain": "smtp.github.com",
+          "ip": "140.82.113.32",
+          "is_live": true,
+          "live_httpx": false,
+          "services": [
+            {
+              "port": 25,
+              "service": "smtp",
+              "product": "Postfix smtpd",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "type": "server"
+        }
+      ],
+      "cbom": [
+        {
+          "domain": "shishir3611.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "shipunyc.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "minesweeper.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "twingo-b.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "4dispel.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "waratuman.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "baladao.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "bdstefan.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "cjdb.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "mroonga.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "ianli.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "obiecre.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "soveran.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "bigeasy.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "jeffreykegler.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "smugen-mugen.github.com",
+          "ip": null,
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "data-science.github.com",
+          "ip": "185.199.110.153",
+          "tls_version": "TLSv1.3",
+          "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+          "algorithm_type": "RSA",
+          "key_strength": "STRONG",
+          "quantum_vulnerable": true,
+          "ports": {
+            "80": true,
+            "443": true,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": 41,
+            "expiry_date": "2026-05-07"
+          },
+          "certificate_status": "OK",
+          "services": [
+            {
+              "port": 80,
+              "service": "http",
+              "product": "GitHub.com",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "https",
+              "product": "GitHub.com",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "outdated_services": false,
+          "type": "web",
+          "risk_level": "Low",
+          "certificate_severity": "low",
+          "certificate_label": "Valid",
+          "tls_label": "Secure",
+          "tls_severity": "low",
+          "quantum_label": "Vulnerable",
+          "quantum_severity": "high",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "github.com",
+          "ip": "20.207.73.82",
+          "tls_version": "TLSv1.3",
+          "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+          "algorithm_type": "ECC",
+          "key_strength": "STRONG",
+          "quantum_vulnerable": true,
+          "ports": {
+            "80": true,
+            "443": true,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": true,
+            "csp": true,
+            "x_frame_options": true,
+            "x_content_type_options": true
+          },
+          "certificate": {
+            "expiry_days": 68,
+            "expiry_date": "2026-06-03"
+          },
+          "certificate_status": "OK",
+          "services": [
+            {
+              "port": 22,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 80,
+              "service": "http",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "https",
+              "product": "",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "outdated_services": false,
+          "type": "web",
+          "risk_level": "Low",
+          "certificate_severity": "low",
+          "certificate_label": "Valid",
+          "tls_label": "Secure",
+          "tls_severity": "low",
+          "quantum_label": "Vulnerable",
+          "quantum_severity": "high",
+          "headers_label": "Secure",
+          "headers_severity": "low"
+        },
+        {
+          "domain": "smtp.github.com",
+          "ip": "140.82.113.32",
+          "tls_version": "Not Supported",
+          "cipher": "None",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": false,
+          "ports": {
+            "80": false,
+            "443": false,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "NO_TLS",
+          "services": [
+            {
+              "port": 25,
+              "service": "smtp",
+              "product": "Postfix smtpd",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "outdated_services": false,
+          "type": "server",
+          "risk_level": "Medium",
+          "certificate_severity": "none",
+          "certificate_label": "No TLS",
+          "tls_label": "No TLS",
+          "tls_severity": "high",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        },
+        {
+          "domain": "lb-140-82-113-35-iad.github.com",
+          "ip": "140.82.113.35",
+          "tls_version": "Unknown",
+          "cipher": "Unknown",
+          "algorithm_type": "UNKNOWN",
+          "key_strength": "MODERATE",
+          "quantum_vulnerable": null,
+          "ports": {
+            "80": true,
+            "443": true,
+            "8080": false,
+            "8443": false
+          },
+          "security_headers": {
+            "hsts": false,
+            "csp": false,
+            "x_frame_options": false,
+            "x_content_type_options": false
+          },
+          "certificate": {
+            "expiry_days": null,
+            "expiry_date": "Unknown"
+          },
+          "certificate_status": "UNREACHABLE",
+          "services": [
+            {
+              "port": 22,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 80,
+              "service": "http",
+              "product": "",
+              "version": "",
+              "outdated": false
+            },
+            {
+              "port": 443,
+              "service": "ssh",
+              "product": "",
+              "version": "",
+              "outdated": false
+            }
+          ],
+          "outdated_services": false,
+          "type": "web",
+          "risk_level": "High",
+          "certificate_severity": "none",
+          "certificate_label": "Unreachable",
+          "tls_label": "Moderate",
+          "tls_severity": "medium",
+          "quantum_label": "Safe",
+          "quantum_severity": "low",
+          "headers_label": "Insecure",
+          "headers_severity": "high"
+        }
+      ]
+    }
   }
 ]

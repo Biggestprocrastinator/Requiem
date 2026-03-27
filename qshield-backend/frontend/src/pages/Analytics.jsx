@@ -44,14 +44,13 @@ export default function Analytics({ scanData, isLoading, error }) {
 
   const elite = assets.filter(a => a.pqc_supported || (a.crypto_algorithm && a.crypto_algorithm.toLowerCase().includes('kyber'))).length;
   const critical = assets.filter(a => (a.vulnerabilities && Object.values(a.vulnerabilities).some(v => v.severity === 'critical')) || (a.risk_level || '').toLowerCase() === 'high').length;
-  const legacyCount = assets.filter(a => a.crypto_algorithm && (a.crypto_algorithm.includes('RSA-1024') || a.crypto_algorithm.includes('SHA-1'))).length;
-  const legacy = legacyCount > 0 ? legacyCount : Math.floor(total * 0.15);
+  const legacy = assets.filter(a => a.crypto_algorithm && (a.crypto_algorithm.includes('RSA-1024') || a.crypto_algorithm.includes('SHA-1'))).length;
   const standard = total - elite - critical - legacy >= 0 ? total - elite - critical - legacy : 0;
 
-  const elitePct = Math.round((elite / total) * 100) || 45;
-  const stdPct = Math.round((standard / total) * 100) || 30;
-  const legacyPct = Math.round((legacy / total) * 100) || 15;
-  const criticalPct = Math.round((critical / total) * 100) || 10;
+  const elitePct = Math.round((elite / total) * 100) || 0;
+  const stdPct = Math.round((standard / total) * 100) || 0;
+  const legacyPct = Math.round((legacy / total) * 100) || 0;
+  const criticalPct = Math.round((critical / total) * 100) || 0;
 
   const recommendations = (scanData.insights && scanData.insights.length > 0) ? scanData.insights : [
     "Upgrade to TLS 1.3 with PQC",
@@ -78,7 +77,7 @@ export default function Analytics({ scanData, isLoading, error }) {
     labels: ['Elite', 'Critical', 'Std'],
     datasets: [{
       label: 'Assets',
-      data: [elite || 37, critical || 2, standard || 4],
+      data: [elite, critical, standard],
       backgroundColor: ['#4ade80', '#ef4444', '#a855f7'],
       borderWidth: 0
     }]
@@ -104,7 +103,7 @@ export default function Analytics({ scanData, isLoading, error }) {
           <span className="text-[#4ade80]">Elite-PQC Ready: {elitePct}%</span> <span className="text-white/30 hidden md:inline">|</span>
           <span className="text-[#eab308]">Standard: {stdPct}%</span> <span className="text-white/30 hidden md:inline">|</span> 
           <span className="text-[#f97316]">Legacy: {legacyPct}%</span> <span className="text-white/30 hidden md:inline">|</span>
-          <span className="text-white">Critical Apps: <span className="text-[#ef4444]">{critical || 8}</span></span>
+          <span className="text-white">Critical Apps: <span className="text-[#ef4444]">{critical}</span></span>
         </div>
       </div>
 
@@ -148,11 +147,11 @@ export default function Analytics({ scanData, isLoading, error }) {
               </tr>
             </thead>
             <tbody>
-              {(assets.length ? assets.slice(0, 4) : [{domain: 'Digigrihavatika.pnbuat.bank.in', pqc: true}, {domain: 'wcw.pnb.bank.in', pqc: true}, {domain: 'Wbbgb.pnbuk.bank.in', pqc: false}]).map((asset, i) => (
+              {assets.slice(0, 8).map((asset, i) => (
                 <tr key={i} className="border-b border-outline-variant/10 text-sm cursor-pointer hover:bg-surface-variant/40 transition-colors" onClick={() => setSelectedAsset(asset)}>
                   <td className="py-3 pl-4 flex items-center gap-2">
                     <span className="material-symbols-outlined text-[16px] text-secondary">language</span> 
-                    {asset.domain || asset.ip || `Asset ${i}`}
+                    {asset.domain || asset.ip || `Asset ${i + 1}`}
                   </td>
                   <td className="py-3 text-center font-bold text-[16px]">
                     {(asset.pqc_supported || asset.pqc || (asset.crypto_algorithm || '').toLowerCase().includes('kyber')) 
@@ -185,23 +184,23 @@ export default function Analytics({ scanData, isLoading, error }) {
             <div className="space-y-4 text-xs font-medium text-on-surface-variant flex-1">
               <div className="flex items-center gap-3 bg-surface p-3 rounded border border-outline-variant/10">
                 <span className="material-symbols-outlined text-xl text-secondary">account_circle</span> 
-                <span className="font-bold text-on-surface text-sm truncate">{activeApp.domain || activeApp.ip || 'App A'}</span>
+                <span className="font-bold text-on-surface text-sm truncate">{activeApp.domain || activeApp.ip || 'Unknown'}</span>
               </div>
               <div className="flex items-center gap-3 px-2 mt-4">
                 <span className="material-symbols-outlined text-lg opacity-60">person</span> 
-                Owner: Team 1
+                Owner: {activeApp.owner || 'IT Security'}
               </div>
               <div className="flex items-center gap-3 px-2">
                 <span className="material-symbols-outlined text-lg opacity-60">public</span> 
-                Exposure: Internet
+                Exposure: {activeApp.exposure || 'Internal'}
               </div>
               <div className="flex items-center gap-3 px-2">
                 <span className="material-symbols-outlined text-lg opacity-60">key</span> 
-                TLS: {activeApp.crypto_algorithm || 'RSA / ECC'}
+                TLS: {activeApp.crypto_algorithm || 'Unknown'}
               </div>
               <div className="flex items-center gap-3 px-2">
                 <span className="material-symbols-outlined text-lg opacity-60">speed</span> 
-                Score: <span className={activeApp.risk_level === 'high' ? 'text-[#ef4444] font-bold' : ''}>{activeApp.risk_score || '480'} ({activeApp.risk_level || 'Critical'})</span>
+                Score: <span className={activeApp.risk_level === 'high' ? 'text-[#ef4444] font-bold' : ''}>{activeApp.risk_score || 'N/A'} ({activeApp.risk_level || 'Unknown'})</span>
               </div>
               <div className="flex items-center gap-3 px-2">
                 <span className="material-symbols-outlined text-lg opacity-60">info</span> 
