@@ -33,3 +33,5 @@ node_modules/
 .vscode/
 # Backend data
 qshield-backend/backend/data/scans.json
+qshield-backend/backend/data/schedules.json
+
