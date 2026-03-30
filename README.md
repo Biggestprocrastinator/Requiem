@@ -17,6 +17,16 @@ Quantum-Proof Cryptography Scanner
 - PostgreSQL (planned)
 
 ## Run Locally
-
+- Frontend
 ```bash
+cd .\qshield-backend\frontend\
+npm install
+npm run dev
+```
+
+- Backend
+```bash
+cd .\qshield-backend\
+.\.venv\Scripts\activate (if venv is created else run 'python -m venv .venv' to create one)
+pip install -r requirements.txt
 uvicorn backend.app.main:app --reload
