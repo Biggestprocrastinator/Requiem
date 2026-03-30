@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 export default function OnDemandReporting({ scanData }) {
   const [reportType, setReportType] = useState('');
@@ -40,54 +41,216 @@ export default function OnDemandReporting({ scanData }) {
 
     // Simulate realistic generation delay
     setTimeout(() => {
-      let exportData = {};
-      
-      // Filter the global scan payload down to the exact requested report type section
-      if (scanData) {
-        switch (reportType) {
-          case 'exec': exportData = { executiveSummary: scanData.summary || scanData }; break;
-          case 'discovery': exportData = { discoveryCounts: scanData.counts || scanData }; break;
-          case 'inventory': exportData = { networkInventory: scanData.inventory || scanData.cbom || scanData }; break;
-          case 'cbom': exportData = { cryptographicBillOfMaterials: scanData.cbom || scanData }; break;
-          case 'pqc': exportData = { pqcAssessment: { risk: scanData.risk, classical: scanData.classical_security, quantum: scanData.quantum_security } }; break;
-          case 'cyber': exportData = { cyberRating: { score: scanData.score, rating: scanData.rating } }; break;
-          default: exportData = scanData;
-        }
-      } else {
-        exportData = { empty: true, message: "No active scan data found."};
-      }
-
       // 1. Output the file to download as PDF
-      const reportName = `QShield_${reportType.toUpperCase()}_Report_${Date.now()}.pdf`;
+      const reportTitleMap = {
+        exec: 'Executive Summary Report',
+        discovery: 'Assets Discovery Report',
+        inventory: 'Network Assets Inventory',
+        cbom: 'Cryptographic Bill of Materials (CBOM)',
+        pqc: 'Posture of Post-Quantum Cryptography (PQC)',
+        cyber: 'Cyber Risk Rating'
+      };
+      const title = reportTitleMap[reportType] || 'Security Report';
+      const reportName = `QShield_${reportType.toUpperCase()}_Report_${new Date().toISOString().split('T')[0]}.pdf`;
       const doc = new jsPDF();
       
       const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
       
-      doc.setFontSize(20);
+      // Header
+      doc.setFontSize(22);
       doc.setTextColor(229, 160, 62); // Qshield orange
-      doc.text(`QShield - ${reportType.toUpperCase()} Report`, 14, 22);
+      doc.text(`QShield - ${title}`, 14, 22);
       
       doc.setFontSize(10);
       doc.setTextColor(100, 100, 100);
       doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 30);
       
-      doc.setFontSize(11);
-      doc.setTextColor(50, 50, 50);
+      doc.setLineDashPattern([], 0);
+      doc.setDrawColor(200, 200, 200);
+      doc.line(14, 35, pageWidth - 14, 35);
       
-      const contentStr = JSON.stringify(exportData, null, 2);
-      const splitText = doc.splitTextToSize(contentStr, pageWidth - 28);
+      // Content Generation based on reportType
+      let startY = 45;
       
-      let cursorY = 40;
-      doc.setFont("courier", "normal"); // Monospaced for JSON block
-      
-      for (let i = 0; i < splitText.length; i++) {
-        if (cursorY > pageHeight - 20) {
-          doc.addPage();
-          cursorY = 20;
+      if (!scanData) {
+        doc.setFontSize(12);
+        doc.setTextColor(200, 50, 50);
+        doc.text("No active scan data found to generate this report.", 14, startY);
+      } else {
+        if (reportType === 'exec') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("Executive Summary", 14, startY);
+          
+          const summaryData = scanData.summary || {};
+          const body = [
+            ['Total Assets Scanned', summaryData.total_assets?.toString() || '0'],
+            ['HTTP Only (Insecure)', summaryData.http_only?.toString() || '0'],
+            ['Quantum Safe Assets', summaryData.quantum_safe?.toString() || '0'],
+            ['High Risk Assets', summaryData.high_risk_assets?.toString() || '0']
+          ];
+          
+          autoTable(doc, {
+            startY: startY + 5,
+            head: [['Metric', 'Value']],
+            body: body,
+            theme: 'striped',
+            headStyles: { fillColor: [229, 160, 62] },
+          });
+        } 
+        else if (reportType === 'discovery') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("Assets Discovery Counts", 14, startY);
+          
+          const countsData = scanData.counts || {};
+          const body = [
+            ['Domains Discovered', countsData.domains?.toString() || '0'],
+            ['Unique IPs', countsData.ips?.toString() || '0'],
+            ['Active Services', countsData.services?.toString() || '0']
+          ];
+          
+          autoTable(doc, {
+            startY: startY + 5,
+            head: [['Discovery Category', 'Count']],
+            body: body,
+            theme: 'grid',
+            headStyles: { fillColor: [229, 160, 62] },
+          });
         }
-        doc.text(splitText[i], 14, cursorY);
-        cursorY += 5; // line height
+        else if (reportType === 'inventory') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("Network Inventory Details", 14, startY);
+          
+          const ports = (scanData.inventory?.ports) || [];
+          let body = ports.map(p => [p.port?.toString(), p.service?.toString()]);
+          if (body.length === 0) body = [['No ports found', '-']];
+
+          autoTable(doc, {
+            startY: startY + 5,
+            head: [['Port', 'Service']],
+            body: body,
+            theme: 'striped',
+            headStyles: { fillColor: [229, 160, 62] },
+          });
+        }
+        else if (reportType === 'cbom') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("Cryptographic Bill of Materials", 14, startY);
+          
+          let body = [];
+          
+          // Depending on CBOM structure from scanData
+          if (Array.isArray(scanData.cbom)) {
+            body = scanData.cbom.map(item => [
+              item.domain || item.name || 'Unknown', 
+              item.algorithm || item.cipher || 'Unknown', 
+              item.key_size?.toString() || item.size?.toString() || 'N/A', 
+              item.quantum_safe ? 'Yes' : 'No'
+            ]);
+          } else if (scanData.cbom && Array.isArray(scanData.cbom.components)) {
+             body = scanData.cbom.components.map(item => [
+                item.name || 'Unknown', 
+                item.crypto_algorithm || 'Unknown', 
+                item.key_length?.toString() || 'N/A', 
+                item.is_quantum_safe ? 'Yes' : 'No'
+             ]);
+          } else if (scanData.cbom && Array.isArray(scanData.cbom.items)) {
+             body = scanData.cbom.items.map(item => [
+                item.domain || item.name || 'Unknown', 
+                item.algorithm || item.cipher || 'Unknown', 
+                item.key_size?.toString() || item.size?.toString() || 'N/A', 
+                item.quantum_safe ? 'Yes' : 'No'
+             ]);
+          }
+          
+          if (body.length > 0) {
+            autoTable(doc, {
+              startY: startY + 5,
+              head: [['Asset / Domain', 'Algorithm', 'Key Size', 'Quantum Safe']],
+              body: body,
+              theme: 'striped',
+              headStyles: { fillColor: [229, 160, 62] },
+            });
+          } else {
+             // fallback if cbom is just a nested object without an array
+             const str = JSON.stringify(scanData.cbom || {}, null, 2);
+             doc.setFontSize(10);
+             doc.setFont("courier", "normal");
+             const lines = doc.splitTextToSize(str, pageWidth - 28);
+             doc.text(lines, 14, startY + 10);
+          }
+        }
+        else if (reportType === 'pqc') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("PQC Risk Assessment", 14, startY);
+          
+          const body = [
+            ['Overall Risk Level', scanData.risk?.toString() || 'Unknown'],
+            ['Classical Security Standard', scanData.classical_security?.toString() || 'Unknown'],
+            ['Quantum Security Standard', scanData.quantum_security?.toString() || 'Unknown']
+          ];
+          
+          autoTable(doc, {
+            startY: startY + 5,
+            head: [['Assessment Factor', 'Evaluation']],
+            body: body,
+            theme: 'grid',
+            headStyles: { fillColor: [229, 160, 62] },
+          });
+        }
+        else if (reportType === 'cyber') {
+          doc.setFontSize(14);
+          doc.setTextColor(50, 50, 50);
+          doc.text("Cyber Rating Evaluation", 14, startY);
+          
+          const totalScore = scanData.score || 0;
+          const letterRating = scanData.rating || 'N/A';
+          doc.setFontSize(30);
+          
+          if (totalScore >= 80) doc.setTextColor(40, 167, 69);
+          else if (totalScore >= 50) doc.setTextColor(255, 193, 7);
+          else doc.setTextColor(220, 53, 69);
+          
+          doc.text(`${totalScore} / 100`, 14, startY + 15);
+          
+          doc.setFontSize(16);
+          doc.setTextColor(100, 100, 100);
+          doc.text(`Rating Tier: ${letterRating}`, 14, startY + 25);
+          
+          if (scanData.insights && scanData.insights.length > 0) {
+             doc.setFontSize(14);
+             doc.setTextColor(50, 50, 50);
+             doc.text("Key Findings:", 14, startY + 45);
+             
+             autoTable(doc, {
+                startY: startY + 50,
+                head: [['Insight / Finding']],
+                body: scanData.insights.map(i => [i]),
+                theme: 'plain',
+                headStyles: { fillColor: [240, 240, 240], textColor: [0, 0, 0] },
+             });
+          }
+        }
+        else {
+           doc.setFontSize(11);
+           doc.text(`Data dump for ${reportType}`, 14, startY);
+           const str = JSON.stringify(scanData, null, 2);
+           const lines = doc.splitTextToSize(str, pageWidth - 28);
+           let cursorY = startY + 10;
+           doc.setFont("courier", "normal");
+           for (let i = 0; i < lines.length; i++) {
+             if (cursorY > doc.internal.pageSize.getHeight() - 20) {
+               doc.addPage();
+               cursorY = 20;
+             }
+             doc.text(lines[i], 14, cursorY);
+             cursorY += 5;
+           }
+        }
       }
 
       doc.save(reportName);

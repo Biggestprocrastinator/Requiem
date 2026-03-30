@@ -6,7 +6,7 @@ export default function ThreatBanner({ risk, rating }) {
 
   const message =
     rating === 'Critical'
-      ? '⚠️ Critical Risk Detected — Immediate action required'
+      ? ' Critical Risk Detected — Immediate action required'
       : '⚠️ High Risk Assets Found';
 
   return (
