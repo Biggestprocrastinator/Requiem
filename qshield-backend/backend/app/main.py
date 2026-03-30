@@ -11,11 +11,13 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, File, UploadFile, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from email.message import EmailMessage
+import smtplib
 
 from backend.app.db import engine, Base
 from backend.app.routers import auth
@@ -461,6 +463,93 @@ def scan_domain(request: ScanRequest):
     save_scan(request.domain, response)
 
     return response
+
+
+@app.post("/api/reports/deliver")
+async def deliver_report(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    reportType: str = Form(None),
+    send_email: bool = Form(False),
+    email_addresses: str = Form(None),
+    save_location: bool = Form(False),
+    location_path: str = Form(None),
+    send_slack: bool = Form(False)
+):
+    import aiofiles
+    
+    content = await file.read()
+    response_msg = []
+    
+    if save_location and location_path:
+        try:
+            target_dir = location_path
+            if not location_path.endswith("/") and not location_path.endswith("\\"):
+                if not "." in os.path.basename(location_path):
+                    target_dir = location_path
+                    target_path = os.path.join(target_dir, file.filename)
+                else: 
+                    target_dir = os.path.dirname(location_path)
+                    target_path = location_path
+            else:
+                target_path = os.path.join(target_dir, file.filename)
+                
+            os.makedirs(target_dir, exist_ok=True)
+            async with aiofiles.open(target_path, 'wb') as out_file:
+                await out_file.write(content)
+            response_msg.append(f"Saved to {target_path}")
+            logger.info(f"Report saved to {target_path}")
+        except Exception as e:
+            logger.error(f"Error saving file to {location_path}: {e}")
+            response_msg.append(f"Error saving to {location_path}")
+
+    if send_email and email_addresses:
+        def _send_email_task(pdf_bytes, filename, emails):
+            smtp_server = os.environ.get("SMTP_SERVER")
+            smtp_port = os.environ.get("SMTP_PORT", 587)
+            smtp_user = os.environ.get("SMTP_USER")
+            smtp_pass = os.environ.get("SMTP_PASS")
+            
+            if not smtp_server or not smtp_user or not smtp_pass:
+                logger.warning(f"SMTP not configured. Simulating email send to {emails} with attachment {filename}")
+                return
+                
+            try:
+                msg = EmailMessage()
+                msg['Subject'] = f"QShield Report: {filename}"
+                msg['From'] = smtp_user
+                msg['To'] = tuple(e.strip() for e in emails.split(","))
+                msg.set_content("Please find the requested QShield On-Demand Security Report attached.")
+                msg.add_attachment(pdf_bytes, maintype='application', subtype='pdf', filename=filename)
+                
+                with smtplib.SMTP(smtp_server, int(smtp_port)) as server:
+                    server.starttls()
+                    server.login(smtp_user, smtp_pass)
+                    server.send_message(msg)
+                logger.info(f"Email sent successfully to {emails}")
+            except Exception as e:
+                logger.error(f"Failed to send email to {emails}: {e}")
+                
+        background_tasks.add_task(_send_email_task, content, file.filename, email_addresses)
+        response_msg.append(f"Scheduled email to {email_addresses}")
+
+    if send_slack:
+        slack_webhook = os.environ.get("SLACK_WEBHOOK_URL")
+        if not slack_webhook:
+            logger.warning(f"Slack webhook not configured. Simulating slack alert for {file.filename}")
+        else:
+            try:
+                import urllib.request
+                payload = {"text": f"New QShield Report Generated: {file.filename}"}
+                req = urllib.request.Request(slack_webhook, data=json.dumps(payload).encode('utf-8'),
+                                             headers={'Content-Type': 'application/json'})
+                urllib.request.urlopen(req)
+                logger.info("Slack notification sent")
+            except Exception as e:
+                logger.error(f"Failed to send Slack notification: {e}")
+        response_msg.append("Slack notification enqueued")
+
+    return {"status": "success", "message": ", ".join(response_msg)}
 
 
 @app.get("/scans")

@@ -9,7 +9,9 @@ export default function OnDemandReporting({ scanData }) {
   
   // Delivery options state
   const [sendViaEmail, setSendViaEmail] = useState(true);
+  const [emailAddresses, setEmailAddresses] = useState("");
   const [saveToLocation, setSaveToLocation] = useState(true);
+  const [saveLocationPath, setSaveLocationPath] = useState("/Reports/OnDemand/");
   const [downloadLink, setDownloadLink] = useState(false);
   const [slackNotification, setSlackNotification] = useState(false);
   
@@ -255,15 +257,45 @@ export default function OnDemandReporting({ scanData }) {
 
       doc.save(reportName);
 
-      // 2. Fulfill visual side-effects
-      if (slackNotification) {
-        alert("Alert pushed to requested Slack webhook channels!");
+      // Convert PDF to blob or file object for sending to backend
+      const pdfBlob = doc.output('blob');
+      const formData = new FormData();
+      formData.append('file', pdfBlob, reportName);
+      formData.append('reportType', reportType);
+      if (sendViaEmail && emailAddresses) {
+         formData.append('send_email', 'true');
+         formData.append('email_addresses', emailAddresses);
       }
-      if (sendViaEmail) {
-        alert("Final report generated and proactively scheduled for email delivery to addresses.");
+      if (saveToLocation && saveLocationPath) {
+         formData.append('save_location', 'true');
+         formData.append('location_path', saveLocationPath);
+      }
+      if (slackNotification) {
+         formData.append('send_slack', 'true');
       }
 
-      setIsGenerating(false);
+      // Send to backend
+      fetch('http://localhost:8000/api/reports/deliver', {
+         method: 'POST',
+         body: formData,
+      })
+      .then(res => res.json())
+      .then(data => {
+         console.log("Delivery response:", data);
+         let alerts = [];
+         if (slackNotification) alerts.push("Alert pushed to Slack!");
+         if (sendViaEmail && emailAddresses) alerts.push("Report scheduled for email delivery.");
+         if (saveToLocation && saveLocationPath) alerts.push("Report saved to: " + saveLocationPath);
+         
+         if (alerts.length > 0) alert(alerts.join("\n"));
+      })
+      .catch(err => {
+         console.error("Error delivering report:", err);
+         alert("Warning: PDF was generated locally, but there was an error communicating with the backend for delivery.");
+      })
+      .finally(() => {
+         setIsGenerating(false);
+      });
     }, 1500);
   };
 
@@ -354,6 +386,8 @@ export default function OnDemandReporting({ scanData }) {
                     <input 
                       type="text" 
                       placeholder="Enter Email Addresses" 
+                      value={emailAddresses}
+                      onChange={(e) => setEmailAddresses(e.target.value)}
                       className="w-full bg-[#fbf8f1] border border-[#f1e6b8] rounded-xl pl-4 pr-10 py-2.5 text-sm text-[#59534f] placeholder-[#c4bbb6] focus:outline-none focus:border-[#e5a03e]"
                     />
                     <button className="absolute right-3 top-1/2 -translate-y-1/2 text-[#e5a03e] hover:text-[#d4902b] transition-colors">
@@ -384,7 +418,8 @@ export default function OnDemandReporting({ scanData }) {
                   <div className="relative pl-8">
                     <input 
                       type="text" 
-                      defaultValue="/Reports/OnDemand/" 
+                      value={saveLocationPath}
+                      onChange={(e) => setSaveLocationPath(e.target.value)}
                       className="w-full bg-[#fbf8f1] border border-[#f1e6b8] rounded-xl pl-4 pr-10 py-2.5 text-sm text-[#59534f] focus:outline-none focus:border-[#e5a03e]"
                     />
                     <button className="absolute right-3 top-1/2 -translate-y-1/2 text-[#e5a03e] hover:text-[#d4902b] transition-colors">
