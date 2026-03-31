@@ -31,3 +31,4 @@ cd .\qshield-backend\
 .\.venv\Scripts\activate (if venv is created else run 'python -m venv .venv' to create one)
 pip install -r requirements.txt
 uvicorn backend.app.main:app --reload
+Install nmap systemwide using official installer at nmap.org
