@@ -1,15 +1,5 @@
+import React, { useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-
-
-const filterLabels = {
-  high: 'High Risk',
-  expiring: 'Expiring Soon',
-  web: 'Web Apps',
-  api: 'APIs',
-  server: 'Servers'
-};
-
-const typeFilters = new Set(['web', 'api', 'server']);
 
 const getExpiryDaysFromAsset = (asset) => {
   const days = asset?.certificate?.expiry_days;
@@ -20,22 +10,38 @@ const getExpiryDaysFromAsset = (asset) => {
   if (expiryDate) {
     const parsed = Date.parse(expiryDate);
     if (!Number.isNaN(parsed)) {
-      const delta = Math.floor((parsed - Date.now()) / (1000 * 60 * 60 * 24));
-      return delta;
+      return Math.floor((parsed - Date.now()) / (1000 * 60 * 60 * 24));
     }
   }
   return null;
 };
 
-const isExpiringAsset = (asset) => {
-  const expiryDays = getExpiryDaysFromAsset(asset);
-  return typeof expiryDays === 'number' && expiryDays >= 0 && expiryDays < 30;
+const getMappedType = (type) => {
+  const t = (type || '').toLowerCase();
+  if (t === 'web') return 'Web Application';
+  if (t === 'api') return 'Api';
+  if (t === 'server') return 'Web Server';
+  if (t === 'domain') return 'Domain';
+  return type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Unknown';
+};
+
+const getTypeColorClass = (type) => {
+  const t = (type || '').toLowerCase();
+  if (t.includes('web application')) return 'bg-blue-100 text-blue-800';
+  if (t.includes('web server')) return 'bg-cyan-100 text-cyan-800';
+  if (t.includes('api')) return 'bg-purple-100 text-purple-800';
+  if (t.includes('domain')) return 'bg-green-100 text-green-800';
+  if (t.includes('ssl')) return 'bg-teal-100 text-teal-800';
+  if (t.includes('cdn')) return 'bg-pink-100 text-pink-800';
+  if (t.includes('mail')) return 'bg-orange-100 text-orange-800';
+  return 'bg-gray-200 text-gray-700';
 };
 
 export default function Assets({ scanData, isLoading, error }) {
   const location = useLocation();
-  const activeFilter = location.state?.filter;
-  const normalizedFilter = activeFilter?.toLowerCase();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [typeFilter, setTypeFilter] = useState('All');
+  const [riskFilter, setRiskFilter] = useState('All');
 
   if (isLoading) {
     return (
@@ -69,112 +75,215 @@ export default function Assets({ scanData, isLoading, error }) {
     );
   }
 
-  const counts = scanData.counts || {};
   const sourceAssets = Array.isArray(scanData.cbom) && scanData.cbom.length ? scanData.cbom : scanData.assets || [];
   const assets = sourceAssets.map((asset) => ({
     ...asset,
-    type: asset?.type || 'server',
+    type: getMappedType(asset?.type || 'Unknown'),
     services: asset?.services || [],
   }));
 
-  console.log('Assets:', assets);
-  console.log('Filter:', activeFilter);
-
-  const filteredAssets = normalizedFilter
-    ? typeFilters.has(normalizedFilter)
-      ? assets.filter((asset) => (asset.type || 'server').toLowerCase() === normalizedFilter)
-      : normalizedFilter === 'high'
-        ? assets.filter((asset) => (asset.risk_level || '').toLowerCase() === 'high')
-        : normalizedFilter === 'expiring'
-          ? assets.filter(isExpiringAsset)
-          : assets
-    : assets;
-
-  const activeFilterLabel = normalizedFilter ? filterLabels[normalizedFilter] : '';
-
-  const renderServiceBadges = (services) => {
-    if (!services || !services.length) {
-      return <span className="text-[11px] text-on-surface-variant">No services detected</span>;
-    }
-
-    return services.map((service, index) => {
-      const label = service.product || service.service || 'Unknown service';
-      const versionSuffix = service.version ? ` ${service.version}` : '';
-      const base = service.outdated
-        ? 'bg-red-100 text-red-800 border border-red-200'
-        : 'bg-emerald-100 text-emerald-800 border border-emerald-200';
-      return (
-        <span
-          key={`${service.port || 'port'}-${index}`}
-          className={`px-2 py-1 text-[11px] font-semibold rounded-full inline-flex items-center gap-1 ${base}`}
-        >
-          <span>{`${label}${versionSuffix}`}</span>
-          {service.outdated && <span className="text-[10px]">⚠</span>}
-        </span>
-      );
+  const typeGroups = useMemo(() => {
+    const groups = {};
+    assets.forEach(a => {
+      groups[a.type] = (groups[a.type] || 0) + 1;
     });
-  };
+    return groups;
+  }, [assets]);
+
+  const filteredAssets = useMemo(() => {
+    return assets.filter(asset => {
+      let matchSearch = true;
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        matchSearch = (asset.domain || '').toLowerCase().includes(q) || 
+                      (asset.ip || '').toLowerCase().includes(q) ||
+                      (asset.type || '').toLowerCase().includes(q);
+      }
+      
+      let matchType = true;
+      if (typeFilter !== 'All') {
+        matchType = asset.type === typeFilter;
+      }
+
+      let matchRisk = true;
+      if (riskFilter !== 'All') {
+        const risk = (asset.risk_level || 'Unknown').toLowerCase();
+        matchRisk = risk === riskFilter.toLowerCase();
+      }
+
+      return matchSearch && matchType && matchRisk;
+    });
+  }, [assets, searchQuery, typeFilter, riskFilter]);
+
+  const numApis = assets.filter(a => a.type === 'Api').length;
 
   return (
-    <div className="grid grid-cols-12 gap-8 auto-rows-min">
-      {/* Asset Inventory Table */}
-      <section className="col-span-12 glass-card rounded-lg p-8 shadow-2xl shadow-[#1d1b19]/5">
-        <div className="flex flex-wrap justify-between items-start gap-3 mb-6">
-          <div>
-            <h3 className="font-headline text-2xl font-extrabold text-on-surface tracking-tight">Asset Discovery</h3>
-            <p className="text-on-surface-variant text-sm mt-1">Found {counts?.domains || 0} domains and {counts?.ips || 0} unique IPs.</p>
+    <div className="flex flex-col gap-6 font-sans">
+      {/* Header section matching the image */}
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-[28px] font-bold text-[#721c24] mb-1 tracking-tight">Asset Inventory</h2>
+          <p className="text-[15px] font-medium text-gray-600">
+            {assets.length} unique assets · {numApis} APIs · 0 CDN-protected · 0 WAF-protected
+          </p>
+        </div>
+      </div>
+
+      {/* Categorization Pills */}
+      <div className="flex flex-wrap gap-3">
+        <button 
+          onClick={() => setTypeFilter('All')}
+          className={`px-4 py-1.5 rounded-full text-sm font-bold transition-colors shadow-sm border border-transparent ${typeFilter === 'All' ? 'bg-[#721c24] text-white' : 'bg-[#e9ecef] text-gray-600 hover:bg-gray-300'} `}
+        >
+          All Assets <span className="ml-1 opacity-70 font-medium">{assets.length}</span>
+        </button>
+        {Object.entries(typeGroups).map(([type, count]) => {
+          let pillClass = getTypeColorClass(type);
+          if (typeFilter === type) {
+            pillClass += " ring-2 ring-offset-2 ring-[#721c24]";
+          } else {
+            pillClass += " hover:brightness-95";
+          }
+          return (
+            <button 
+              key={type}
+              onClick={() => setTypeFilter(type)}
+              className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all shadow-sm ${pillClass} `}
+            >
+              {type} <span className="ml-1 font-medium">{count}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Search and Risk Filters */}
+      <div className="bg-[#fcf8f0] p-4 rounded-xl flex items-center justify-between shadow-sm border border-[#e5dfd3]">
+        <div className="flex items-center gap-8 w-full max-w-4xl">
+          <div className="relative flex-1">
+            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span>
+            <input 
+              type="text" 
+              placeholder="Search assets, types..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-4 py-2.5 bg-white border border-[#dee2e6] rounded-lg text-[15px] font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#721c24]/20 focus:border-[#721c24]"
+            />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {activeFilterLabel && (
-              <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                Filtered: {activeFilterLabel}
-              </span>
-            )}
-            <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Inventory</span>
+          
+          <div className="flex items-center gap-4">
+            <span className="text-[15px] font-medium text-gray-500">Risk:</span>
+            <div className="flex flex-wrap gap-1 border border-[#dee2e6] rounded-md p-1 bg-white">
+              {['All', 'Critical', 'High', 'Medium', 'Low', 'Unknown'].map(risk => {
+                let riskColor = riskFilter === risk ? 'bg-[#721c24] text-white border-transparent' : 'bg-transparent text-gray-600 hover:bg-gray-100 border-transparent';
+                if (riskFilter !== risk) {
+                  if (risk === 'Critical') riskColor += ' hover:text-red-700';
+                  if (risk === 'High') riskColor += ' hover:text-orange-600';
+                  if (risk === 'Medium') riskColor += ' hover:text-amber-600';
+                  if (risk === 'Low') riskColor += ' hover:text-green-600';
+                }
+                
+                return (
+                  <button
+                    key={risk}
+                    onClick={() => setRiskFilter(risk)}
+                    className={`px-4 py-1.5 rounded text-[13px] font-bold border transition-colors ${riskColor}`}
+                  >
+                    {risk}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-        
-        <div className="overflow-hidden rounded-xl border border-outline-variant/30 mt-4">
-          <table className="min-w-full divide-y divide-outline-variant/30">
-            <thead className="bg-surface-container-low">
-              <tr>
-                <th className="px-6 py-4 text-left text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant/60">Domain</th>
-                <th className="px-6 py-4 text-left text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant/60">IP Address</th>
-                <th className="px-6 py-4 text-left text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant/60">Services</th>
+        <div className="text-[14px] font-medium text-gray-500 pl-4">
+          {filteredAssets.length} of {assets.length} assets
+        </div>
+      </div>
+
+      {/* Asset Table */}
+      <div className="bg-[#fdfbf6] rounded-xl overflow-hidden border border-[#e5dfd3] shadow-md">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-[#e5dfd3]">
+                <th className="p-4 w-4 bg-transparent"></th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Asset</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Asset Type</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">IP / Subnet</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Cipher Str.</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">TLS</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Key</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Issuer CA</th>
+                <th className="p-4 text-[11px] font-bold tracking-[0.1em] text-[#721c24] uppercase whitespace-nowrap bg-transparent">Risk</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-outline-variant/30 bg-surface">
-              {filteredAssets && filteredAssets.length > 0 ? (
-                filteredAssets.map((asset, i) => (
-                  <tr key={asset.domain || i} className="hover:bg-surface-variant/20 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-on-surface">
-                      <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm text-secondary">language</span>
-                        {asset.domain || 'Unknown'}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-on-surface-variant">
-                      <div className="flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm text-on-surface-variant/50">router</span>
-                        {asset.ip || 'Unknown'}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm font-medium text-on-surface">
-                      <div className="flex flex-wrap gap-2">{renderServiceBadges(asset.services)}</div>
-                    </td>
-                  </tr>
-                ))
+            <tbody className="divide-y divide-[#e5dfd3]">
+              {filteredAssets.length > 0 ? (
+                filteredAssets.map((asset, i) => {
+                  let cipherColor = 'text-gray-500 bg-gray-100';
+                  if (asset.tls_label === 'Secure') cipherColor = 'text-green-700 bg-green-50';
+                  else if (asset.tls_label === 'Moderate') cipherColor = 'text-[#b07d12] bg-[#fbf5e6]';
+                  else if (asset.tls_label === 'Weak') cipherColor = 'text-red-700 bg-red-50';
+                  
+                  const typeClass = getTypeColorClass(asset.type);
+                  const isApi = (asset.type || '').toLowerCase() === 'api';
+                  
+                  return (
+                    <tr key={i} className="hover:bg-black/[0.02] transition-colors">
+                      <td className="p-4 w-4"></td>
+                      <td className="p-4 text-[14px] font-bold text-[#1a56db] whitespace-nowrap">{asset.domain || '--'}</td>
+                      <td className="p-4 text-[14px]">
+                        <span className={`px-2.5 py-1 rounded-full text-[12px] font-bold ${typeClass} whitespace-nowrap`}>
+                          {asset.type}
+                        </span>
+                      </td>
+                      <td className="p-4 text-[14px] font-medium text-gray-700 whitespace-nowrap">
+                        {asset.ip ? (
+                          <div className="flex flex-col leading-tight">
+                            <span>{asset.ip}</span>
+                            <span className="text-gray-400 text-[11px] italic mt-0.5">{asset.ip}/24</span>
+                          </div>
+                        ) : <span className="text-gray-400">--</span>}
+                      </td>
+                      <td className="p-4 text-[14px] font-bold whitespace-nowrap">
+                        {asset.tls_label ? (
+                          <span className={`px-2 py-0.5 rounded text-[12px] ${cipherColor}`}>{asset.tls_label}</span>
+                        ) : (
+                          <span className="text-gray-400">Unknown</span>
+                        )}
+                      </td>
+                      <td className={`p-4 text-[14px] font-bold whitespace-nowrap ${['Not Supported', 'Unknown', null, undefined].includes(asset.tls_version) ? 'text-red-500' : 'text-green-600'}`}>
+                        {asset.tls_version && asset.tls_version !== 'Unknown' ? asset.tls_version : 'Not Supported'}
+                      </td>
+                      <td className="p-4 text-[14px] font-bold text-[#1a56db] whitespace-nowrap">{asset.key_size ? `${asset.key_size}-bit` : <span className="text-gray-300">--</span>}</td>
+                      <td className="p-4 text-[13px] font-medium text-gray-600 truncate max-w-[150px]" title={asset.certificate?.issuer_ca || ''}>
+                        {asset.certificate?.issuer_ca || <span className="text-gray-300">--</span>}
+                      </td>
+                      <td className="p-4 text-[14px] whitespace-nowrap">
+                        <span className={`px-2 inline-flex text-xs leading-5 font-bold rounded-full ${
+                          asset.risk_level === 'Low' ? 'bg-green-100 text-green-800' : 
+                          asset.risk_level === 'Medium' || asset.risk_level === 'Moderate' ? 'bg-secondary-container text-on-secondary-container bg-[#fbf5e6] text-[#b07d12]' :
+                          asset.risk_level === 'High' || asset.risk_level === 'Critical' ? 'bg-error-container text-on-error-container bg-red-100 text-red-800' :
+                          'bg-gray-100 text-gray-800'
+                        }`}>
+                          {asset.risk_level || 'Unknown'}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
-                  <td colSpan="3" className="px-6 py-8 text-center text-sm font-medium text-on-surface-variant">No assets found</td>
+                  <td colSpan="9" className="p-12 text-center">
+                    <span className="material-symbols-outlined text-4xl text-gray-300 mb-2">search_off</span>
+                    <p className="text-gray-500 font-medium">No assets matching your filters</p>
+                  </td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
-      </section>
-
-
+      </div>
     </div>
   );
 }

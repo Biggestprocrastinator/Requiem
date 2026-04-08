@@ -43,6 +43,7 @@ def get_certificate_expiry(domain: str, port_443_open: bool = True) -> dict:
         return {
             "expiry_days": None,
             "expiry_date": None,
+            "issuer_ca": None,
             "certificate_status": "No HTTPS",
         }
 
@@ -64,6 +65,7 @@ def get_certificate_expiry(domain: str, port_443_open: bool = True) -> dict:
             return {
                 "expiry_days": None,
                 "expiry_date": None,
+                "issuer_ca": None,
                 "certificate_status": "NO_CERT",
             }
 
@@ -73,6 +75,7 @@ def get_certificate_expiry(domain: str, port_443_open: bool = True) -> dict:
             return {
                 "expiry_days": None,
                 "expiry_date": None,
+                "issuer_ca": None,
                 "certificate_status": "NO_CERT",
             }
 
@@ -85,10 +88,24 @@ def get_certificate_expiry(domain: str, port_443_open: bool = True) -> dict:
             if days_left < 30
             else "OK"
         )
+        
+        issuer_ca = None
+        issuer_data = cert.get("issuer")
+        if issuer_data:
+            for item in issuer_data:
+                for sub_item in item:
+                    if sub_item[0] in ("organizationName", "O"):
+                        issuer_ca = sub_item[1]
+            if not issuer_ca:
+                for item in issuer_data:
+                    for sub_item in item:
+                        if sub_item[0] in ("commonName", "CN"):
+                            issuer_ca = sub_item[1]
 
         return {
             "expiry_days": days_left,
             "expiry_date": expiry_dt.date().isoformat(),
+            "issuer_ca": issuer_ca,
             "certificate_status": status,
         }
     except Exception as exc:
@@ -96,6 +113,7 @@ def get_certificate_expiry(domain: str, port_443_open: bool = True) -> dict:
         return {
             "expiry_days": None,
             "expiry_date": None,
+            "issuer_ca": None,
             "certificate_status": "UNREACHABLE",
         }
 

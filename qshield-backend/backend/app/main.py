@@ -388,6 +388,7 @@ def run_crypto_scans(assets: list[dict]) -> list[dict]:
                 "certificate": {
                     "expiry_days": cert_info.get("expiry_days"),
                     "expiry_date": cert_info.get("expiry_date"),
+                    "issuer_ca": cert_info.get("issuer_ca"),
                 },
                 "certificate_status": cert_status,
             }
@@ -399,6 +400,7 @@ def run_crypto_scans(assets: list[dict]) -> list[dict]:
         tls_result["certificate"] = {
             "expiry_days": cert_info.get("expiry_days"),
             "expiry_date": cert_info.get("expiry_date"),
+            "issuer_ca": cert_info.get("issuer_ca"),
         }
         tls_result["certificate_status"] = cert_status
         tls_result["type"] = asset_type
