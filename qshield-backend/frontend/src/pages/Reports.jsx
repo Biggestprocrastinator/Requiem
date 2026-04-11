@@ -3,7 +3,7 @@ import OnDemandReporting from '../components/OnDemandReporting';
 import ScheduleReporting from '../components/ScheduleReporting';
 
 export default function Reports({ scanData, isLoading, error }) {
-  const [activeReportView, setActiveReportView] = useState('ondemand');
+  const [activeReportView, setActiveReportView] = useState(null);
 
   if (isLoading) {
     return (
@@ -44,7 +44,23 @@ export default function Reports({ scanData, isLoading, error }) {
 
   return (
     <div className="grid grid-cols-12 gap-8 auto-rows-min">
-      {/* Cards Section */}
+      {activeReportView ? (
+        <div className="col-span-12 space-y-4">
+          <button
+            onClick={() => setActiveReportView(null)}
+            className="flex items-center gap-2 text-on-surface-variant hover:text-on-surface transition-colors font-bold text-sm bg-surface-variant/30 hover:bg-surface-variant/50 py-2 px-4 rounded-lg w-fit"
+          >
+            <span className="material-symbols-outlined text-sm">arrow_back</span>
+            Back to Dashboard
+          </button>
+          <div className="mt-2">
+            {activeReportView === 'ondemand' && <OnDemandReporting scanData={scanData} />}
+            {activeReportView === 'schedule' && <ScheduleReporting />}
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Cards Section */}
       <section className="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Executive Reporting Card */}
         <div className="glass-card rounded-2xl p-6 flex flex-col justify-between border border-transparent shadow-lg opacity-80 cursor-default transition-all">
@@ -64,37 +80,35 @@ export default function Reports({ scanData, isLoading, error }) {
         </div>
 
         {/* Scheduled Reporting Card */}
-        <div 
+        <div
           onClick={() => setActiveReportView('schedule')}
-          className={`glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer border transition-all ${
-            activeReportView === 'schedule' 
-              ? 'border-[#e5a03e] ring-2 ring-[#e5a03e]/20 shadow-[#e5a03e]/10 shadow-xl' 
-              : 'border-transparent hover:border-outline-variant/30 shadow-lg hover:shadow-xl'
-          }`}
+          className={`glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer border transition-all ${activeReportView === 'schedule'
+              ? 'border-secondary ring-2 ring-secondary/20 shadow-secondary/10 shadow-xl scale-[1.02]'
+              : 'border-transparent hover:border-outline-variant/30 shadow-lg hover:shadow-xl hover:-translate-y-1'
+            }`}
         >
           <div>
-            <div className="w-12 h-12 rounded-xl bg-[#e5a03e]/10 flex items-center justify-center mb-5">
-              <span className="material-symbols-outlined text-[#e5a03e] text-2xl">calendar_month</span>
+            <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-5">
+              <span className="material-symbols-outlined text-secondary text-2xl">calendar_month</span>
             </div>
             <h3 className="text-xl font-bold text-on-surface mb-2">Scheduled Reporting</h3>
             <p className="text-sm text-on-surface-variant font-medium leading-relaxed">
               Automate periodic report generation with email and storage delivery.
             </p>
           </div>
-          <div className={`mt-6 flex items-center font-bold text-sm ${activeReportView === 'schedule' ? 'text-[#e5a03e]' : 'text-[#e5a03e]/80'} hover:underline`}>
+          <div className={`mt-6 flex items-center font-bold text-sm ${activeReportView === 'schedule' ? 'text-secondary' : 'text-secondary/80'} hover:underline`}>
             <span>{activeReportView === 'schedule' ? 'Currently viewing' : 'Get started'}</span>
             <span className="material-symbols-outlined text-sm ml-1">chevron_right</span>
           </div>
         </div>
 
         {/* On-Demand Reporting Card */}
-        <div 
+        <div
           onClick={() => setActiveReportView('ondemand')}
-          className={`glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer border transition-all ${
-            activeReportView === 'ondemand' 
-              ? 'border-primary ring-2 ring-primary/20 shadow-primary/10 shadow-xl' 
-              : 'border-transparent hover:border-outline-variant/30 shadow-lg hover:shadow-xl'
-          }`}
+          className={`glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer border transition-all ${activeReportView === 'ondemand'
+              ? 'border-primary ring-2 ring-primary/20 shadow-primary/10 shadow-xl scale-[1.02]'
+              : 'border-transparent hover:border-outline-variant/30 shadow-lg hover:shadow-xl hover:-translate-y-1'
+            }`}
         >
           <div>
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
@@ -112,9 +126,7 @@ export default function Reports({ scanData, isLoading, error }) {
         </div>
       </section>
 
-      {/* Selected Reporting Component */}
-      {activeReportView === 'ondemand' && <OnDemandReporting scanData={scanData} />}
-      {activeReportView === 'schedule' && <ScheduleReporting />}
+      {/* Selected Reporting Component (Moved up) */}
 
       {/* Overview Stats */}
       <section className="col-span-12 lg:col-span-8 glass-card rounded-lg p-8 shadow-2xl shadow-[#1d1b19]/5 flex flex-col justify-between min-h-[280px]">
@@ -220,8 +232,8 @@ export default function Reports({ scanData, isLoading, error }) {
               <span className="text-sm font-bold">Overall Score</span>
               <span className="text-2xl font-black text-secondary">{scanData?.score || 0}/100</span>
             </div>
-            <div className="h-3 w-full bg-secondary-fixed rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-secondary to-secondary-container rounded-full" style={{ width: `${scanData?.score || 0}%` }}></div>
+            <div className="h-3 w-full bg-surface-container-high rounded-full overflow-hidden shadow-inner">
+              <div className="h-full bg-gradient-to-r from-secondary to-primary rounded-full transition-all duration-1000" style={{ width: `${scanData?.score || 0}%` }}></div>
             </div>
           </div>
           <div className="space-y-3">
@@ -253,6 +265,8 @@ export default function Reports({ scanData, isLoading, error }) {
           )}
         </div>
       </section>
+        </>
+      )}
     </div>
   );
 }

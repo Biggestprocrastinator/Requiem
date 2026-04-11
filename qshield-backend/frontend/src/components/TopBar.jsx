@@ -46,17 +46,17 @@ export default function TopBar({ onScan }) {
   }, [inputError]);
 
   return (
-    <header className="fixed top-0 right-0 left-64 h-16 flex items-center justify-between px-6 z-40 bg-[#fef8f3]/80 backdrop-blur-md">
+    <header className="fixed top-0 right-0 left-64 h-16 flex items-center justify-between px-6 z-40 bg-white/80 backdrop-blur-xl border-b border-outline-variant/40 shadow-[0_4px_24px_rgba(15,23,42,0.02)]">
       <div className="flex items-center gap-3">
-        <h2 className="font-inter text-base font-bold text-[#594141] tracking-wide">Security Command Center</h2>
-        <span className="h-4 w-[1px] bg-outline-variant/30"></span>
-        <span className="text-xs font-bold uppercase tracking-widest text-secondary">Operational Mode</span>
+        <h2 className="font-inter text-base font-bold text-on-surface tracking-wide">Security Command Center</h2>
+        <span className="h-4 w-[1px] bg-outline-variant/60"></span>
+        <span className="text-xs font-bold uppercase tracking-widest text-primary">Operational Mode</span>
       </div>
       <div className="flex items-center gap-4">
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant text-[18px] pointer-events-none">search</span>
           <input
-            className="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-secondary/20 w-56"
+            className="bg-surface-container border border-outline-variant/50 rounded-full pl-10 pr-4 py-1.5 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 w-64 shadow-inner transition-all placeholder:text-on-surface-variant/50"
             placeholder="Scan domain (e.g. example.com)..."
             type="text"
             value={domain}
@@ -67,7 +67,7 @@ export default function TopBar({ onScan }) {
           <div className="absolute left-0 top-full mt-1 pl-3 text-xs text-red-500 w-full overflow-hidden text-ellipsis whitespace-nowrap">{helperText}</div>
         </div>
         <button
-          className="px-3 py-1.5 rounded-full bg-secondary text-white font-semibold text-sm hover:bg-secondary/80 transition-colors"
+          className="px-4 py-1.5 rounded-full bg-primary text-white font-bold text-sm hover:bg-primary-variant hover:shadow-[0_4px_12px_rgba(181,10,46,0.2)] transition-all"
           onClick={handleSubmit}
         >
           Scan

@@ -23,8 +23,8 @@ export default function Dashboard({ scanData, isLoading, error }) {
       <div className="bg-error-container text-on-error-container p-4 flex items-center gap-3 rounded-lg shadow-sm border border-error/20">
         <span className="material-symbols-outlined text-error">error</span>
         <div className="flex-1">
-            <h4 className="font-bold text-sm">Scan Failed</h4>
-            <p className="text-xs">{error}</p>
+          <h4 className="font-bold text-sm">Scan Failed</h4>
+          <p className="text-xs">{error}</p>
         </div>
       </div>
     );
@@ -40,7 +40,10 @@ export default function Dashboard({ scanData, isLoading, error }) {
     );
   }
 
-  const { score, risk, quantum_status, summary, rating, insights } = scanData;
+  const { score, risk, quantum_status, summary, rating, insights, cbom, inventory, counts } = scanData;
+  const activeAssets = summary?.total_assets || 0;
+  const httpOnlyCount = summary?.http_only || 0;
+  const pqcRiskLevel = scanData?.risk || 'Low';
 
   const totalAssets = summary?.total_assets || 0;
   const highRisk = summary?.high_risk_assets || 0;
@@ -52,11 +55,11 @@ export default function Dashboard({ scanData, isLoading, error }) {
   const servers = uniqueIPs.length;
 
   const kpiCards = [
-    { title: 'Total Assets', value: totalAssets, className: 'bg-blue-500 text-white' },
-    { title: 'High Risk Assets', value: highRisk, className: 'bg-gradient-to-r from-red-500 to-red-700 text-white', filter: 'high' },
-    { title: 'Expiring Soon', value: expiringSoon, className: 'bg-amber-500 text-white', filter: 'expiring' },
-    { title: 'APIs', value: apis, className: 'bg-cyan-500 text-white', filter: 'api' },
-    { title: 'Servers', value: servers, className: 'bg-slate-500 text-white', filter: 'server' }
+    { title: 'Total Assets', value: totalAssets, className: 'bg-white border-l-4 border-blue-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: '' },
+    { title: 'High Risk Assets', value: highRisk, className: 'bg-white border-l-4 border-primary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'high' },
+    { title: 'Expiring Soon', value: expiringSoon, className: 'bg-white border-l-4 border-secondary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'expiring' },
+    { title: 'APIs', value: apis, className: 'bg-white border-l-4 border-indigo-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'api' },
+    { title: 'Servers', value: servers, className: 'bg-white border-l-4 border-emerald-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'server' }
   ];
 
   const handleCardClick = (filter) => {
@@ -76,7 +79,7 @@ export default function Dashboard({ scanData, isLoading, error }) {
             <h3 className="font-headline text-sm font-semibold text-on-surface tracking-[0.2em]">Dashboard Overview</h3>
             <p className="text-on-surface-variant text-xs mt-1">High-level security and compliance metrics.</p>
           </div>
-          <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Executive</span>
+          <span className="bg-primary/5 border border-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Executive</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           <div className="space-y-1">
@@ -88,18 +91,16 @@ export default function Dashboard({ scanData, isLoading, error }) {
           </div>
           <div className="space-y-1">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-on-surface-variant/70">Risk Level</span>
-            <div className={`text-2xl font-bold leading-tight ${
-              risk === 'Low' ? 'text-green-600' : 
-              risk === 'Medium' ? 'text-secondary' : 
-              'text-error'
-            }`}>
+            <div className={`text-2xl font-bold leading-tight ${risk === 'Low' ? 'text-green-600' :
+              risk === 'Medium' ? 'text-secondary' :
+                'text-error'
+              }`}>
               {risk || 'Unknown'}
             </div>
-            <div className={`flex items-center gap-1 text-[11px] font-semibold mt-1 leading-tight tracking-wide ${
-              risk === 'Low' ? 'text-green-600' : 
-              risk === 'Medium' ? 'text-secondary' : 
-              'text-error'
-            }`}>
+            <div className={`flex items-center gap-1 text-[11px] font-semibold mt-1 leading-tight tracking-wide ${risk === 'Low' ? 'text-green-600' :
+              risk === 'Medium' ? 'text-secondary' :
+                'text-error'
+              }`}>
               <span className="material-symbols-outlined text-[12px]">{risk === 'Low' ? 'verified' : 'warning'}</span> Assessment
             </div>
           </div>
@@ -135,8 +136,8 @@ export default function Dashboard({ scanData, isLoading, error }) {
               }}
               className={`rounded-2xl w-full min-w-0 p-3 flex flex-col justify-between gap-1 overflow-hidden truncate ${card.className} shadow-lg shadow-black/25 cursor-pointer transition-transform duration-200 ease-out transform hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary`}
             >
-              <span className="text-xs uppercase tracking-[0.4em] opacity-80 truncate leading-tight">{card.title}</span>
-              <div className="text-2xl font-bold leading-tight">{card.value}</div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 truncate leading-tight">{card.title}</span>
+              <div className="text-3xl font-black text-slate-800 leading-tight mt-1">{card.value}</div>
             </div>
           ))}
         </div>

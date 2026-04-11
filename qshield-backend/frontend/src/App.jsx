@@ -12,6 +12,8 @@ import Settings from './pages/Settings';
 import VulnerabilityScan from './pages/VulnerabilityScan';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CBOM from './pages/CBOM';
+import CyberRating from './pages/CyberRating';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 
@@ -99,6 +101,8 @@ export default function App() {
               <Route path="vulnerability-scan" element={<VulnerabilityScan scanData={scanData} isLoading={isLoading} error={error} setNucleiResults={setNucleiResults} />} />
               <Route path="analytics" element={<Analytics scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="reports" element={<Reports scanData={scanData} isLoading={isLoading} error={error} />} />
+              <Route path="cbom" element={<CBOM scanData={scanData} isLoading={isLoading} error={error} />} />
+              <Route path="cyber-rating" element={<CyberRating scanData={scanData} isLoading={isLoading} error={error} />} />
               <Route path="settings" element={<Settings />} />
             </Route>
           </Route>

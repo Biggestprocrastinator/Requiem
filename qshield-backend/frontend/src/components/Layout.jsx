@@ -7,9 +7,9 @@ export default function Layout({ onScan, scanData, nucleiResults }) {
   return (
     <>
       <Sidebar />
-      <main className="fixed top-0 right-0 left-64 bottom-0 flex flex-col overflow-y-auto bg-surface tech-pattern">
+      <main className="fixed top-0 right-0 left-64 bottom-0 flex flex-col overflow-y-auto bg-surface-dim tech-pattern">
         <TopBar onScan={onScan} />
-        <div className="mt-16 p-6 space-y-6 max-w-[1600px]">
+        <div className="mt-16 p-8 space-y-8 max-w-[1600px] mx-auto w-full">
           <Outlet />
         </div>
         {/* <footer className="mt-auto p-4 border-t border-outline-variant/10 text-on-surface-variant/40 text-[10px] font-bold uppercase tracking-widest flex justify-between items-center">
