@@ -1,4 +1,5 @@
 import logging
+import re
 import socket
 import subprocess
 from pathlib import Path
@@ -10,10 +11,45 @@ try:
 except ImportError:  # pragma: no cover
     dns = None
 
-MAX_ASSETS = 20
-MAX_SUBDOMAINS = 50
 
 logger = logging.getLogger(__name__)
+
+
+_DOMAIN_ALLOWED_RE = re.compile(r"^[A-Za-z0-9.-]+$")
+
+
+def _is_valid_domain(domain: str) -> bool:
+    if not domain:
+        return False
+
+    candidate = domain.strip()
+    if not candidate:
+        return False
+
+    if candidate.startswith("*."):
+        return False
+
+    if "/" in candidate or " " in candidate or "\t" in candidate:
+        return False
+
+    if candidate.startswith(".") or candidate.endswith(".") or "." not in candidate:
+        return False
+
+    try:
+        ascii_domain = candidate.encode("idna").decode("ascii")
+    except UnicodeError:
+        return False
+
+    if len(ascii_domain) > 253 or not _DOMAIN_ALLOWED_RE.match(ascii_domain):
+        return False
+
+    for label in ascii_domain.split("."):
+        if not label or len(label) > 63:
+            return False
+        if label.startswith("-") or label.endswith("-"):
+            return False
+
+    return True
 
 
 def _resolve_ip(domain: str):
@@ -55,7 +91,10 @@ def _locate_executable(name: str, fallback: str | None = None) -> List[str]:
         project_root = Path(__file__).resolve().parents[3]
         candidate = project_root / fallback
         if candidate.exists():
-            command = [str(candidate)]
+            return [str(candidate)]
+        backend_candidate = project_root / "backend" / fallback
+        if backend_candidate.exists():
+            return [str(backend_candidate)]
     return command
 
 
@@ -94,75 +133,131 @@ def _run_subfinder(domain: str) -> Iterable[str]:
     return []
 
 
-def _filter_live_domains(domains: List[str]) -> Tuple[List[str], bool]:
-    if not domains:
-        return [], True
+def _write_lines(path: Path, lines: Iterable[str]) -> None:
+    items = list(lines)
+    path.write_text("\n".join(items) + ("\n" if items else ""), encoding="utf-8")
 
-    cmd = _locate_executable("httpx") + [
+
+def _read_lines(path: Path) -> List[str]:
+    if not path.exists():
+        return []
+    return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def _run_httpx(domains_path: Path, http_live_path: Path) -> Tuple[set[str], bool]:
+    cmd = _locate_executable("httpx", fallback="httpx.exe") + [
+        "-l",
+        str(domains_path),
         "-silent",
-        "-follow-redirects",
-        "-timeout",
-        "5",
-        "-retries",
-        "2",
+        "-threads",
+        "100",
     ]
+
     try:
-        payload = "\n".join(domains)
         result = subprocess.run(
             cmd,
-            input=payload,
             capture_output=True,
             text=True,
-            timeout=25,
+            timeout=120,
             check=False,
         )
 
-        live = result.stdout.splitlines()
-        live = [clean_domain(line) for line in live if clean_domain(line)]
+        live: List[str] = []
+        for line in result.stdout.splitlines():
+            if not line:
+                continue
+            url = line.split()[0]
+            cleaned = clean_domain(url)
+            if cleaned and _is_valid_domain(cleaned):
+                live.append(cleaned)
         live = list(dict.fromkeys(live))
+        _write_lines(http_live_path, live)
 
-        print("HTTPX returned:", len(live))
-        return live, True
+        if result.returncode != 0 and not live:
+            error_msg = (result.stderr or "").strip()
+            if error_msg:
+                logger.warning("HTTPX failed: %s", error_msg)
+                return set(), False
+
+        return set(live), True
 
     except (subprocess.TimeoutExpired, OSError):
-        print("HTTPX returned: 0 (fallback)")
-        return [], False
+        print("HTTPX failed")
+        _write_lines(http_live_path, [])
+        return set(), False
+
+
+def _run_dns(domains_path: Path, dns_live_path: Path) -> dict[str, str | None]:
+    domains = _read_lines(domains_path)
+    resolved: dict[str, str | None] = {}
+    dns_live: List[str] = []
+
+    for domain in domains:
+        ip_address = _resolve_ip(domain)
+        resolved[domain] = ip_address
+        if ip_address is not None:
+            dns_live.append(domain)
+
+    _write_lines(dns_live_path, dns_live)
+    return resolved
 
 
 def discover_assets(domain: str):
     subdomains = _run_subfinder(domain)
-    subdomains = list(dict.fromkeys(subdomains))  # dedupe while keeping order
-    subdomains = subdomains[:MAX_SUBDOMAINS]
-    print("Subfinder count:", len(subdomains))
-    print("Subdomains limited to:", len(subdomains))
-    domain_clean = clean_domain(domain)
     subdomains = [clean_domain(d) for d in subdomains if clean_domain(d)]
-    if domain_clean and domain_clean not in subdomains:
+    subdomains = list(set(subdomains))
+
+    cleaned = []
+    for d in subdomains:
+        if d and not d.startswith("*.") and _is_valid_domain(d):
+            cleaned.append(d)
+    subdomains = cleaned
+
+    domain_clean = clean_domain(domain)
+    if domain_clean and _is_valid_domain(domain_clean) and domain_clean not in subdomains:
         subdomains.insert(0, domain_clean)
+
     if not subdomains:
-        logger.info("No subdomains found for %s", domain)
-        subdomains = [domain_clean] if domain_clean else []
-    print("Subfinder returned:", len(subdomains))
-    live_domains, httpx_success = _filter_live_domains(subdomains)
+        logger.info("No valid subdomains found for %s", domain)
+        return []
+
+    domains_path = Path("domains.txt")
+    http_live_path = Path("http_live.txt")
+    dns_live_path = Path("dns_live.txt")
+    nmap_targets_path = Path("nmap_targets.txt")
+    nuclei_targets_path = Path("nuclei_targets.txt")
+
+    _write_lines(domains_path, subdomains)
+    print(f"Total discovered: {len(subdomains)}")
+
+    print("HTTPX input count:", len(_read_lines(domains_path)))
+    http_live, httpx_success = _run_httpx(domains_path, http_live_path)
+    if not httpx_success:
+        print("HTTPX failed \u2014 not using fallback")
+    print("HTTPX output count:", len(http_live))
+
+    resolved_map = _run_dns(domains_path, dns_live_path)
+
+    _write_lines(nmap_targets_path, _read_lines(dns_live_path))
+    _write_lines(nuclei_targets_path, _read_lines(http_live_path))
+
     assets = []
-    for candidate in subdomains:
-        cleaned_candidate = clean_domain(candidate)
-        ip_address = _resolve_ip(cleaned_candidate)
-        print(f"{cleaned_candidate} → {ip_address}")
-        live_httpx = cleaned_candidate in live_domains
+    domains = _read_lines(domains_path)
+    print(f"Processing domains: {len(domains)}")
+    for candidate in domains:
+        ip_address = resolved_map.get(candidate)
+        print(f"{candidate} -> {ip_address}")
+        live_httpx = candidate in http_live
         assets.append(
             {
-                "domain": cleaned_candidate,
+                "domain": candidate,
                 "ip": ip_address,
-                "is_live": live_httpx,
+                "is_live": ip_address is not None,
                 "live_httpx": live_httpx,
             }
         )
-    print("Live domains:", len(live_domains))
-
     if not assets:
         logger.error("Subfinder returned no domains for %s", domain)
-    assets = assets[:MAX_ASSETS]
     print("Final assets:", len(assets))
 
     return assets
