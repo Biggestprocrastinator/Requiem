@@ -12,8 +12,6 @@
     <img src="https://img.shields.io/github/forks/Biggestprocrastinator/Requiem?style=for-the-badge&logo=github" />
   </a>
 
-  <img src="https://img.shields.io/github/license/Biggestprocrastinator/Requiem?style=for-the-badge" />
-
   <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python" />
 
   <img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi" />
@@ -24,19 +22,30 @@
 
   <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" />
 
+  <img src="https://img.shields.io/badge/PQC-Ready-purple?style=for-the-badge" />
+  
+  <img src="https://img.shields.io/badge/Cyber-Rating-orange?style=for-the-badge" />
+
+  <img src="https://img.shields.io/badge/CBOM-Enabled-black?style=for-the-badge" />
+
 </p>
 
 ---
 
 ## 🚀 Overview
-<img src="https://img.shields.io/badge/PQC-Ready-purple?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Cyber-Rating-orange?style=for-the-badge" />
-<img src="https://img.shields.io/badge/CBOM-Enabled-black?style=for-the-badge" />
-**Requiem** is a next-generation **cryptographic intelligence and asset discovery platform** designed to analyze enterprise infrastructure for **security vulnerabilities and post-quantum cryptography readiness**.
 
-It combines **reconnaissance, cryptographic analysis, and vulnerability scanning** into a unified dashboard.
+**Requiem** is a next-generation **cryptographic intelligence platform** that enables organizations to discover assets, analyze vulnerabilities, and assess **post-quantum cryptographic readiness** in a unified interface.
 
+It integrates **reconnaissance, TLS analysis, certificate intelligence, and vulnerability scanning** to provide actionable security insights across enterprise infrastructure.
 
+---
+## 🧠 Why Requiem?
+
+- 🔍 Combines **asset discovery + cryptographic analysis**
+- 🔐 Provides **CBOM (Cryptographic Bill of Materials)**
+- ⚛️ Evaluates **Post-Quantum Cryptography readiness**
+- ⚡ Designed for **real-time security insights**
+  
 ---
 
 ## ✨ Features
@@ -175,7 +184,6 @@ npm run dev
 
 ## 🛠️ Roadmap
 
-* [ ] Async pipeline optimization
 * [ ] Real-time scan progress tracking
 * [ ] Advanced risk scoring engine
 * [ ] Authentication & role-based access
@@ -189,19 +197,3 @@ Contributions are welcome!
 Feel free to fork the repo and submit a PR.
 
 ---
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 💡 Inspiration
-
-Built to address the growing need for **quantum-ready security analysis** and unified visibility into enterprise cryptographic posture.
-
----
-
-<p align="center">
-  ⚡ Built for Security • Designed for Scale • Ready for the Quantum Era ⚡
-</p>
