@@ -78,10 +78,10 @@ export default function TopAssets({ data }) {
   };
 
   return (
-    <section className="col-span-12 mt-6 bg-gray-900 rounded-2xl border border-white/10 shadow-xl p-4">
+    <section className="col-span-12 mt-6 rounded-2xl border border-[#e5dfd3] shadow-lg p-4" style={{ background: 'linear-gradient(135deg, #fdfbf6 0%, #f8f4ec 100%)' }}>
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h3 className="text-white text-sm font-semibold tracking-wide">Top 5 Assets Summary</h3>
+          <h3 className="text-[#721c24] text-sm font-semibold tracking-wide">Top 5 Assets Summary</h3>
           <p className="text-[11px] text-on-surface-variant">Prioritized by risk and certificate health</p>
         </div>
         <span className="text-xs uppercase tracking-[0.3em] text-secondary">Live</span>

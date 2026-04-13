@@ -9,7 +9,10 @@ export default function Recommendations({ insights }) {
     });
 
   return (
-    <section className="col-span-12 md:col-span-6 bg-surface/90 backdrop-blur rounded-3xl p-4 shadow-lg border border-outline-variant/20">
+    <section
+      className="col-span-12 md:col-span-6 backdrop-blur rounded-3xl p-4 shadow-lg border border-[#e5dfd3]"
+      style={{ background: 'linear-gradient(135deg, #fdfbf6 0%, #f8f4ec 100%)' }}
+    >
       <div className="flex items-center justify-between mb-3">
         <div>
           <h4 className="font-semibold text-sm text-on-surface tracking-wide">Recommended Actions</h4>

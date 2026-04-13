@@ -19,15 +19,15 @@ const barOptions = {
     x: {
       grid: { display: false },
       ticks: {
-        color: "#f8fafc",
-        font: { size: 11 }
+        color: "#475569",
+        font: { size: 11, weight: 500 }
       }
     },
     y: {
       grid: { display: false },
       ticks: {
-        color: "#f8fafc",
-        font: { size: 11 },
+        color: "#475569",
+        font: { size: 11, weight: 600 },
         padding: 2
       }
     }
@@ -44,18 +44,18 @@ const donutOptions = {
     legend: {
       position: "bottom",
       labels: {
-        color: "#f8fafc",
-        font: { size: 11 }
+        color: "#334155",
+        font: { size: 11, weight: 600 }
       }
     }
   }
 };
 
 const WidgetCard = ({ title, children, subtitle }) => (
-  <div className="bg-gray-900 rounded-2xl border border-white/10 shadow-xl p-3 h-[260px] flex flex-col overflow-hidden">
+  <div className="rounded-2xl border border-[#e5dfd3] shadow-lg p-3 h-[260px] flex flex-col overflow-hidden" style={{ background: 'linear-gradient(135deg, #fdfbf6 0%, #f8f4ec 100%)' }}>
     <div className="flex items-center justify-between mb-2">
-      <h3 className="text-sm font-medium text-white truncate tracking-wide leading-tight">{title}</h3>
-      {subtitle && <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">{subtitle}</span>}
+      <h3 className="text-sm font-semibold text-[#721c24] truncate tracking-wide leading-tight">{title}</h3>
+      {subtitle && <span className="text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">{subtitle}</span>}
     </div>
     <div className="flex-1 min-h-0">{children}</div>
   </div>
@@ -91,8 +91,10 @@ export function CertificateExpiryCard({ data }) {
             datasets: [
               {
                 data: expiryValues,
-                backgroundColor: ["#ef4444", "#f97316", "#facc15", "#22c55e"],
-                borderWidth: 0
+                backgroundColor: ["#ef4444", "#f97316", "#FABC0A", "#22c55e"],
+                borderColor: ["#dc2626", "#ea580c", "#D49D00", "#16a34a"],
+                borderWidth: 2,
+                borderRadius: 4
               }
             ]
           }}
@@ -115,7 +117,9 @@ export function IpVersionCard({ data }) {
       {
         data: totalIPs ? [ipv4Count, ipv6Count] : [0, 0],
         backgroundColor: ["#38bdf8", "#a5b4fc"],
-        borderWidth: 0
+        borderColor: ["#0284c7", "#6366f1"],
+        borderWidth: 2,
+        hoverOffset: 6
       }
     ]
   };
@@ -127,7 +131,7 @@ export function IpVersionCard({ data }) {
           <div className="relative h-[200px]">
             <Doughnut data={donutData} options={donutOptions} />
           </div>
-          <p className="text-center text-xs text-white mt-2">
+          <p className="text-center text-xs text-[#334155] font-semibold mt-2">
             IPv4 {ipv4Percent}% · IPv6 {100 - ipv4Percent}%
           </p>
         </>

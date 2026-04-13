@@ -55,11 +55,11 @@ export default function Dashboard({ scanData, isLoading, error }) {
   const servers = uniqueIPs.length;
 
   const kpiCards = [
-    { title: 'Total Assets', value: totalAssets, className: 'bg-white border-l-4 border-blue-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: '' },
-    { title: 'High Risk Assets', value: highRisk, className: 'bg-white border-l-4 border-primary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'high' },
-    { title: 'Expiring Soon', value: expiringSoon, className: 'bg-white border-l-4 border-secondary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'expiring' },
-    { title: 'APIs', value: apis, className: 'bg-white border-l-4 border-indigo-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'api' },
-    { title: 'Servers', value: servers, className: 'bg-white border-l-4 border-emerald-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'server' }
+    { title: 'Total Assets', value: totalAssets, className: 'border-l-4 border-blue-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: '' },
+    { title: 'High Risk Assets', value: highRisk, className: 'border-l-4 border-primary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'high' },
+    { title: 'Expiring Soon', value: expiringSoon, className: 'border-l-4 border-secondary text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'expiring' },
+    { title: 'APIs', value: apis, className: 'border-l-4 border-indigo-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'api' },
+    { title: 'Servers', value: servers, className: 'border-l-4 border-emerald-500 text-slate-800 shadow-sm hover:shadow-md transition-shadow', filter: 'server' }
   ];
 
   const handleCardClick = (filter) => {
@@ -73,7 +73,10 @@ export default function Dashboard({ scanData, isLoading, error }) {
   return (
     <div className="grid grid-cols-12 gap-4 auto-rows-min">
       <ThreatBanner risk={risk} rating={rating} />
-      <section className="col-span-12 glass-card rounded-lg p-4 shadow-2xl shadow-[#1d1b19]/5">
+      <section
+        className="col-span-12 rounded-lg p-4 shadow-xl border border-[#e5dfd3]"
+        style={{ background: 'linear-gradient(135deg, #fdfbf6 0%, #f8f4ec 100%)' }}
+      >
         <div className="flex justify-between items-start mb-4">
           <div>
             <h3 className="font-headline text-sm font-semibold text-on-surface tracking-[0.2em]">Dashboard Overview</h3>
@@ -134,7 +137,8 @@ export default function Dashboard({ scanData, isLoading, error }) {
                   handleCardClick(card.filter);
                 }
               }}
-              className={`rounded-2xl w-full min-w-0 p-3 flex flex-col justify-between gap-1 overflow-hidden truncate ${card.className} shadow-lg shadow-black/25 cursor-pointer transition-transform duration-200 ease-out transform hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary`}
+              className={`rounded-2xl w-full min-w-0 p-3 flex flex-col justify-between gap-1 overflow-hidden truncate ${card.className} shadow-lg shadow-black/5 border border-[#e5dfd3] cursor-pointer transition-transform duration-200 ease-out transform hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary`}
+              style={{ background: 'linear-gradient(135deg, #fdfbf6 0%, #f8f4ec 100%)' }}
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 truncate leading-tight">{card.title}</span>
               <div className="text-3xl font-black text-slate-800 leading-tight mt-1">{card.value}</div>
