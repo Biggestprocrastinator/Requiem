@@ -40,12 +40,69 @@ from backend.app.services.rating_engine import calculate_rating
 from backend.app.services.nmap_scan import scan_ports, scan_service_versions, run_nmap_scan
 from backend.app.services.real_crypto_scan import scan_tls
 from backend.app.services.storage import save_scan, get_latest_scans, save_nuclei_scan, get_latest_nuclei_scan, get_nuclei_scan
+from backend.app.core.security import get_password_hash
 from backend.app.services.cert_analysis import get_certificate_expiry
 from backend.app.services.security_headers import check_security_headers
 from backend.app.services.schedule_store import add_schedule, load_schedules, update_schedule_status
 
 # Initialize DB tables on startup
 Base.metadata.create_all(bind=engine)
+
+
+def _run_migrations():
+    """Safely add new columns to existing SQLite tables without losing data.
+    SQLite supports ALTER TABLE … ADD COLUMN so this is safe on live databases.
+    """
+    from sqlalchemy import text, inspect as sa_inspect
+    inspector = sa_inspect(engine)
+    try:
+        existing = {col['name'] for col in inspector.get_columns('users')}
+    except Exception:
+        return  # table doesn't exist yet; create_all will handle it
+
+    with engine.connect() as conn:
+        if 'totp_secret' not in existing:
+            conn.execute(text("ALTER TABLE users ADD COLUMN totp_secret VARCHAR"))
+            conn.commit()
+        if 'totp_enabled' not in existing:
+            conn.execute(text("ALTER TABLE users ADD COLUMN totp_enabled BOOLEAN NOT NULL DEFAULT 0"))
+            conn.commit()
+        if 'role' not in existing:
+            conn.execute(text("ALTER TABLE users ADD COLUMN role VARCHAR NOT NULL DEFAULT 'viewer'"))
+            conn.commit()
+
+
+_run_migrations()
+
+
+ADMIN_SEEDS = [
+    ("admin2@gmail.com", "Admin#2026"),
+    ("admin3@gmail.com", "Admin#2026"),
+]
+
+
+def _seed_admin_accounts():
+    from sqlalchemy import text
+
+    with engine.connect() as conn:
+        for email, password in ADMIN_SEEDS:
+            existing = conn.execute(text("SELECT role FROM users WHERE email = :email"), {"email": email}).first()
+            hashed = get_password_hash(password)
+            if existing is None:
+                conn.execute(
+                    text(
+                        "INSERT INTO users (email, hashed_password, role, totp_enabled) "
+                        "VALUES (:email, :hashed, 'admin', 0)"
+                    ),
+                    {"email": email, "hashed": hashed},
+                )
+                conn.commit()
+            elif existing[0] != "admin":
+                conn.execute(text("UPDATE users SET role = 'admin', hashed_password = :hashed WHERE email = :email"), {"email": email, "hashed": hashed})
+                conn.commit()
+
+
+_seed_admin_accounts()
 
 logger = logging.getLogger(__name__)
 
