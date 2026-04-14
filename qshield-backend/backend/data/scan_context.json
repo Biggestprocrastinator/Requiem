@@ -1671,12 +1671,157 @@
   },
   "threat_surface": [
     {
-      "domain": "vupune.ac.in",
-      "type": "*original",
-      "ip": "3.109.41.211",
+      "domain": "slbcdelhi.pnb.bankd.in",
+      "type": "addition",
+      "ip": "208.91.196.91",
       "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bink.in",
+      "type": "bitsquatting",
+      "ip": "64.190.63.222",
+      "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.rank.in",
+      "type": "bitsquatting",
+      "ip": "64.190.63.222",
+      "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.1bank.in",
+      "type": "homoglyph",
+      "ip": "64.190.63.222",
+      "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.ibank.in",
+      "type": "homoglyph",
+      "ip": "64.190.63.222",
+      "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bonk.in",
+      "type": "vowel-swap",
+      "ip": "64.190.63.222",
+      "has_mx": true,
+      "similarity": null,
+      "risk": "HIGH"
+    },
+    {
+      "domain": "slbcdelhi.pnb.banke.in",
+      "type": "addition",
+      "ip": "104.21.68.79",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.banki.in",
+      "type": "addition",
+      "ip": "75.2.103.23",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.banka.in",
+      "type": "addition",
+      "ip": "91.195.241.232",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bani.in",
+      "type": "bitsquatting",
+      "ip": "104.247.81.99",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.fank.in",
+      "type": "bitsquatting",
+      "ip": "104.247.81.99",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bamk.in",
+      "type": "homoglyph",
+      "ip": "139.162.174.209",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.dark.in",
+      "type": "homoglyph",
+      "ip": "66.6.44.4",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.dank.in",
+      "type": "homoglyph",
+      "ip": "91.195.241.232",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.lbank.in",
+      "type": "homoglyph",
+      "ip": "91.195.241.232",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.nank.in",
+      "type": "replacement",
+      "ip": "192.64.119.254",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnbbank.in",
+      "type": "various",
+      "ip": "185.53.177.29",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bank-in.com",
+      "type": "various",
+      "ip": "66.45.246.141",
+      "has_mx": false,
+      "similarity": null,
+      "risk": "MEDIUM"
+    },
+    {
+      "domain": "slbcdelhi.pnb.bank.in",
+      "type": "*original",
+      "ip": "49.50.81.77",
+      "has_mx": false,
       "similarity": null,
       "risk": "LOW"
     }
-  ]
+  ],
+  "vulnerabilities": []
 }

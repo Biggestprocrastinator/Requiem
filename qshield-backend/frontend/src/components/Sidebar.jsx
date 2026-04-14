@@ -7,7 +7,6 @@ const navItems = [
   { path: '/assets', icon: 'inventory_2', label: 'Assets' },
   { path: '/asset-inventory', icon: 'account_tree', label: 'Asset Inventory' },
   { path: '/vulnerability-scan', icon: 'bug_report', label: 'Vulnerability Scan' },
-  { path: '/threat-surface', icon: 'travel_explore', label: 'Threat Surface' },
   { path: '/cbom', icon: 'inventory', label: 'CBOM' },
   { path: '/cyber-rating', icon: 'grade', label: 'Cyber Rating' },
   { path: '/analytics', icon: 'policy', label: 'Posture of PQC' },
