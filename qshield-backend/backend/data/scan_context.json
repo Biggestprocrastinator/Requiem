@@ -1,0 +1,1672 @@
+{
+  "domain": "vupune.ac.in",
+  "assets": [
+    {
+      "domain": "icaio.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "onlineadmissionapi.vupune.ac.in",
+      "ip": "15.207.217.242",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "vunet.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "testingicaio.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "learner.vupune.ac.in",
+      "ip": "18.172.64.26",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "erpadmin.vupune.ac.in",
+      "ip": "13.205.53.99",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "onlineadmission.vupune.ac.in",
+      "ip": "108.159.80.100",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "vupune.ac.in",
+      "ip": "3.109.41.211",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "incon-ctlvu.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "research.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "admission.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "erp.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "convo.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "iqube.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "testingiqube.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "careers.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "vulj.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "vuerp.vupune.ac.in",
+      "ip": "18.239.111.69",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "icsiaiml.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "phdadmission.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "event.vupune.ac.in",
+      "ip": null,
+      "is_live": false,
+      "live_httpx": false,
+      "services": [],
+      "type": "server"
+    },
+    {
+      "domain": "jstir.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    },
+    {
+      "domain": "icrcsd.vupune.ac.in",
+      "ip": "13.126.185.221",
+      "is_live": true,
+      "live_httpx": true,
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "type": "web"
+    }
+  ],
+  "cbom": [
+    {
+      "domain": "testingicaio.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "vunet.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "icaio.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "learner.vupune.ac.in",
+      "ip": "18.172.64.26",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 291,
+        "expiry_date": "2027-01-30",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "onlineadmissionapi.vupune.ac.in",
+      "ip": "15.207.217.242",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 161,
+        "expiry_date": "2026-09-22",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "erpadmin.vupune.ac.in",
+      "ip": "13.205.53.99",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 113,
+        "expiry_date": "2026-08-05",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "research.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "erp.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "admission.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "onlineadmission.vupune.ac.in",
+      "ip": "108.159.80.100",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 161,
+        "expiry_date": "2026-09-22",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "convo.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "incon-ctlvu.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "testingiqube.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "careers.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "vupune.ac.in",
+      "ip": "3.109.41.211",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": true,
+        "x_content_type_options": true
+      },
+      "certificate": {
+        "expiry_days": 170,
+        "expiry_date": "2026-10-01",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Partial",
+      "headers_severity": "medium"
+    },
+    {
+      "domain": "phdadmission.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "event.vupune.ac.in",
+      "ip": null,
+      "tls_version": "Not Supported",
+      "cipher": "None",
+      "key_size": null,
+      "certificate_algo": null,
+      "algorithm": null,
+      "signature": null,
+      "algorithm_type": "UNKNOWN",
+      "key_strength": "MODERATE",
+      "quantum_vulnerable": false,
+      "ports": {
+        "80": false,
+        "443": false,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": null,
+        "expiry_date": null,
+        "issuer_ca": null
+      },
+      "certificate_status": "No HTTPS",
+      "services": [],
+      "outdated_services": false,
+      "type": "server",
+      "risk_level": "Medium",
+      "certificate_severity": "none",
+      "certificate_label": "No HTTPS",
+      "tls_label": "No TLS",
+      "tls_severity": "high",
+      "quantum_label": "Safe",
+      "quantum_severity": "low",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "iqube.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "vulj.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "icsiaiml.vupune.ac.in",
+      "ip": "3.109.147.75",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "vuerp.vupune.ac.in",
+      "ip": "18.239.111.69",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 291,
+        "expiry_date": "2027-01-30",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "Amazon CloudFront httpd",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "https",
+          "product": "",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "jstir.vupune.ac.in",
+      "ip": "13.205.24.1",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    },
+    {
+      "domain": "icrcsd.vupune.ac.in",
+      "ip": "13.126.185.221",
+      "tls_version": "TLSv1.3",
+      "cipher": "TLS_CHACHA20_POLY1305_SHA256",
+      "key_size": 2048,
+      "certificate_algo": "RSA",
+      "algorithm": "RSA",
+      "signature": "sha256",
+      "algorithm_type": "RSA",
+      "key_strength": "STRONG",
+      "quantum_vulnerable": true,
+      "ports": {
+        "80": true,
+        "443": true,
+        "8080": false,
+        "8443": false
+      },
+      "security_headers": {
+        "hsts": false,
+        "csp": false,
+        "x_frame_options": false,
+        "x_content_type_options": false
+      },
+      "certificate": {
+        "expiry_days": 163,
+        "expiry_date": "2026-09-24",
+        "issuer_ca": "Amazon"
+      },
+      "certificate_status": "OK",
+      "services": [
+        {
+          "port": 80,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        },
+        {
+          "port": 443,
+          "service": "http",
+          "product": "AWS Elastic Load Balancing",
+          "version": "",
+          "outdated": false
+        }
+      ],
+      "outdated_services": false,
+      "type": "web",
+      "risk_level": "Low",
+      "certificate_severity": "low",
+      "certificate_label": "Valid",
+      "tls_label": "Secure",
+      "tls_severity": "low",
+      "quantum_label": "Vulnerable",
+      "quantum_severity": "high",
+      "headers_label": "Insecure",
+      "headers_severity": "high"
+    }
+  ],
+  "summary": {
+    "total_assets": 23,
+    "https_enabled": 16,
+    "http_only": 0,
+    "quantum_vulnerable": 16,
+    "quantum_safe": 7,
+    "high_risk_assets": 0,
+    "header_issues": 23,
+    "unreachable_assets": 0,
+    "expiring_soon": 0,
+    "outdated_services": 0
+  }
+}

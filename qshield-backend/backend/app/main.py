@@ -27,6 +27,7 @@ from zoneinfo import ZoneInfo
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.date import DateTrigger
 from dotenv import load_dotenv
+from fastapi.responses import StreamingResponse
 
 load_dotenv()  # Load .env file so SMTP credentials are available
 
@@ -46,6 +47,7 @@ from backend.app.services.cert_analysis import get_certificate_expiry
 from backend.app.services.security_headers import check_security_headers
 from backend.app.services.schedule_store import add_schedule, load_schedules, update_schedule_status
 from backend.app.services.threat_surface import scan_threat_surface
+from backend.app.services.scan_context import build_scan_context, load_scan_context, stream_local_gemini
 
 # Initialize DB tables on startup
 Base.metadata.create_all(bind=engine)
@@ -324,6 +326,11 @@ class ThreatSurfaceRequest(BaseModel):
     phishing_detection: bool = True
 
 
+class AiChatRequest(BaseModel):
+    query: str
+    history: list[dict[str, str]] | None = None
+
+
 # ---------------------------------------------------------------------------
 # Scheduled email job
 # ---------------------------------------------------------------------------
@@ -471,6 +478,9 @@ async def threat_surface(req: ThreatSurfaceRequest):
     high = sum(1 for row in findings if row.get("risk") == "HIGH")
     medium = sum(1 for row in findings if row.get("risk") == "MEDIUM")
     low = sum(1 for row in findings if row.get("risk") == "LOW")
+    build_scan_context(
+        threat_surface=findings,
+    )
 
     return {
         "domain": domain,
@@ -483,6 +493,41 @@ async def threat_surface(req: ThreatSurfaceRequest):
         },
         "results": findings,
     }
+
+
+@app.post("/ai-chat")
+async def ai_chat(req: AiChatRequest):
+    query = (req.query or "").strip()
+    if not query:
+        raise HTTPException(status_code=422, detail="Query is required")
+
+    context = load_scan_context()
+    history = (req.history or [])[-5:]
+    history_lines = []
+    for item in history:
+        role = (item.get("role") or "").strip()
+        content = (item.get("content") or "").strip()
+        if role and content:
+            history_lines.append(f"{role.title()}: {content}")
+
+    prompt = (
+        "Scan Data:\n"
+        f"{json.dumps(context, indent=2)}\n\n"
+        + (f"Conversation History:\n" + "\n".join(history_lines) + "\n\n" if history_lines else "")
+        + f"User Question: {query}"
+    )
+
+    def event_stream():
+        try:
+            for chunk in stream_local_gemini(prompt):
+                if chunk:
+                    yield f"data: {json.dumps({'chunk': chunk})}\n\n"
+            yield f"data: {json.dumps({'done': True})}\n\n"
+        except Exception as exc:
+            logger.exception("AI chat failed")
+            yield f"data: {json.dumps({'error': 'AI service unavailable'})}\n\n"
+
+    return StreamingResponse(event_stream(), media_type="text/event-stream")
 
 
 @app.get("/api/reports/schedules")
@@ -806,6 +851,12 @@ def scan_domain(request: ScanRequest):
             if request.use_crtsh:
                 response["crtsh_certificates"] = crtsh_certificates
             save_scan(request.domain, response)
+            build_scan_context(
+                domain=request.domain,
+                assets=assets,
+                cbom=[],
+                summary=response.get("summary") or {},
+            )
             return response
 
         crypto_results = run_crypto_scans(
@@ -999,6 +1050,12 @@ def scan_domain(request: ScanRequest):
             response["crtsh_certificates"] = crtsh_certificates
 
         save_scan(request.domain, response)
+        build_scan_context(
+            domain=request.domain,
+            assets=assets,
+            cbom=cbom,
+            summary=response.get("summary") or {},
+        )
 
         return response
     finally:
@@ -1332,6 +1389,9 @@ def run_nuclei_scan(request: NucleiRequest):
             "findings": current_scan["results"],
         }
         run_id = save_nuclei_scan(run_payload)
+        build_scan_context(
+            vulnerabilities=current_scan["results"],
+        )
         return {
             "success": False,
             "error": f"Nuclei exited with code {process.returncode}",
@@ -1355,6 +1415,9 @@ def run_nuclei_scan(request: NucleiRequest):
         "summary": summary,
     }
     run_id = save_nuclei_scan(run_payload)
+    build_scan_context(
+        vulnerabilities=current_scan["results"],
+    )
 
     return {"success": True, "findings": current_scan["results"], "summary": summary, "total": len(current_scan["results"]), "run_id": run_id}
 
