@@ -25,17 +25,17 @@ RUN apt-get update && apt-get install -y \
 # Download and install ProjectDiscovery tools (Linux binaries)
 # Subfinder
 RUN wget https://github.com/projectdiscovery/subfinder/releases/download/v2.6.6/subfinder_2.6.6_linux_amd64.zip && \
-    unzip subfinder_2.6.6_linux_amd64.zip -d /usr/local/bin/ && \
+    unzip -o subfinder_2.6.6_linux_amd64.zip -d /usr/local/bin/ && \
     rm subfinder_2.6.6_linux_amd64.zip
 
 # HTTPX
 RUN wget https://github.com/projectdiscovery/httpx/releases/download/v1.6.0/httpx_1.6.0_linux_amd64.zip && \
-    unzip httpx_1.6.0_linux_amd64.zip -d /usr/local/bin/ && \
+    unzip -o httpx_1.6.0_linux_amd64.zip -d /usr/local/bin/ && \
     rm httpx_1.6.0_linux_amd64.zip
 
 # Nuclei
 RUN wget https://github.com/projectdiscovery/nuclei/releases/download/v3.3.0/nuclei_3.3.0_linux_amd64.zip && \
-    unzip nuclei_3.3.0_linux_amd64.zip -d /usr/local/bin/ && \
+    unzip -o nuclei_3.3.0_linux_amd64.zip -d /usr/local/bin/ && \
     rm nuclei_3.3.0_linux_amd64.zip
 
 # Copy backend requirements and install
